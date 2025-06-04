@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réservation | Delicio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    input, button {
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+    }
+
+    input {
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    button {
+      background-color: white;
+      color: black;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #e5e5e5;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #ccc;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Réserve ta table</h1>
+  <form id="reservationForm">
+    <input type="text" id="name" name="name" placeholder="Ton nom" required />
+    <input type="email" id="email" name="email" placeholder="Ton email" required />
+    <input type="date" id="date" name="date" required />
+    <input type="time" id="time" name="time" required />
+    <button type="submit">Réserver</button>
+  </form>
+  <div id="message"></div>
+
+  <script type="module">
+    import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
+
+    const client = new Client();
+    client
+      .setEndpoint('https://fra.cloud.appwrite.io/v1') // 👉 remplace ça
+      .setProject('68405af5000bcab54b45');                  // 👉 et ça
+
+    const databases = new Databases(client);
+    const databaseId = '68405d540011fb76549ddefault'; // ou ton vrai ID
+    const collectionId = '68405dc8000d6a5fb575'; // ID exact
+
+    const form = document.getElementById('reservationForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        date: form.date.value,
+        time: form.time.value,
+      };
+
+      try {
+        await databases.createDocument(databaseId, collectionId, 'unique()', data);
+        message.innerText = "✅ Réservation confirmée. Merci !";
+        form.reset();
+      } catch (error) {
+        message.innerText = "❌ Erreur lors de la réservation.";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>.noa.webstudio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    header video, header::before {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+.video-section {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: left; /* place le contenu à droite */
+  padding-right: 2rem;       /* un peu d’espace à droite si tu veux */
+}
+
+.video-section video {
+  width: 40vw;    /* taille réduite, ajuste comme tu veux */
+  height: auto;
+  display: block;
+}
+
+
+
+
+
+    header::before {
+      content: "";
+      background: rgba(0,0,0,0.6);
+    }
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+    }
+    .logo img {
+      height: 60px;
+    }
+   nav {
+  position: fixed;
+  top: 2rem;
+  left: 50%; /* Centrage horizontal */
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  background: rgba(5, 139, 0, 0.61);
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  z-index: 1000;
+}
+
+nav a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ccc;
+}
+
+    
+    .headline {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-top: 6rem;
+      max-width: 90%;
+    }
+    .subhead {
+      margin-top: 1rem;
+      color: #aaa;
+      font-size: 1.2rem;
+    }
+
+.features, .projects, .pricing, .contact {
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.feature {
+  background: linear-gradient(145deg, #1c1c1c, #111);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #66ffcc;
+}
+
+.feature p {
+  font-size: 1rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.feature {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease;
+}
+
+.feature.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.projects-section {
+  padding: 4rem 0; /* Pas de padding gauche/droite */
+  background: #000000;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center; /* Centre horizontalement le contenu */
+}
+
+.projects-grid {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+
+  justify-content: flex-start; /* Les projets commencent bien à gauche de la grille */
+  width: max-content; /* Largeur adaptative selon le contenu */
+}
+
+
+.project {
+  flex: 0 0 auto; /* Largeur auto, ne se réduit pas */
+  width: 250px; /* Largeur fixe pour un format vertical */
+  height: 400px; /* Hauteur plus grande pour format portrait */
+  scroll-snap-align: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background-color: #111;
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.project img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+  filter: brightness(80%);
+}
+
+.project:hover img {
+  transform: scale(1.08);
+  filter: brightness(100%);
+}
+
+.project::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project:hover::before {
+  opacity: 1;
+}
+
+.project-info {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  color: #fff;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.project:hover .project-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+
+
+    .pricing-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  justify-content: center;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.price-box {
+  background: #f9f9f9;
+  color: #222;
+  padding: 2.5rem 2rem;
+  border-radius: 1.2rem;
+  min-width: 220px;
+  max-width: 320px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.price-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input, textarea {
+  padding: 1.2rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 0.6rem;
+  font-size: 1.1rem;
+  color: #333;
+  background: #fff;
+  transition: border-color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #66ccaa;
+  box-shadow: 0 0 8px rgba(102, 204, 170, 0.4);
+}
+
+button {
+  background: #66ccaa;
+  color: #fff;
+  font-weight: 700;
+  padding: 1.2rem;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: background-color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+  background-color: #55b28f;
+}
+
+
+    .headline {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin-top: 6rem;
+  max-width: 90%;
+  position: relative;
+  color: #fff;
+  background: linear-gradient(270deg, #a6a6a6, #fff, #a6a6a6);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s ease-in-out infinite;
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.4),
+    0 0 20px rgba(255,255,255,0.3);
+}
+
+
+@keyframes shine {
+  0% {
+    background-position: 0% 50%;
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.2),
+      0 0 20px rgba(255,255,255,0.1);
+  }
+  50% {
+    background-position: 100% 50%;
+    text-shadow:
+      0 0 15px rgba(255,255,255,0.8),
+      0 0 30px rgba(255,255,255,0.6);
+  }
+  100% {
+    background-position: 0% 50%;
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.2),
+      0 0 20px rgba(255,255,255,0.1);
+  }
+}
+
+.features.hidden, 
+.projects.hidden, 
+.pricing.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.features.visible, 
+.projects.visible, 
+.pricing.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.price-box {
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 40px rgba(255,255,255,0.05);
+  transition: transform 0.3s ease;
+}
+.price-box:hover {
+  transform: translateY(-5px);
+}
+
+.typing {
+  font-size: 2.1rem;
+  font-weight: 300;
+  color: #ffffff91;
+  min-height: 2rem;
+  margin-top: 27px;
+  text-align: center;      /* Garde l’alignement à gauche */
+}
+
+
+
+
+/* Responsive pour mobiles */
+@media (max-width: 768px) {
+  header {
+    padding: 0 1rem;
+  }
+
+  .headline {
+    font-size: 1.8rem;
+    margin-top: 4rem;
+  }
+
+  .subhead {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  
+
+  nav {
+    position: fixed;
+    top: auto;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 7.5rem;
+    border-radius: 1.5rem;
+    gap: 1.2rem;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  nav a {
+    font-size: 1rem;
+  }
+
+  .features-list {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+ .projects-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .project {
+    min-width: 85%;
+    scroll-snap-align: center;
+  }
+}
+
+  .pricing-grid {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .price-box {
+    min-width: 100%;
+    max-width: 300px;
+  }
+
+  .contact form {
+    padding: 0 1rem;
+  }
+
+  input, textarea {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <video autoplay muted loop>
+      <source src="site.jpg" type="video/gif">
+    </video>
+     <div class="logo">
+      <img src="logonoa.svg" alt=".noa.webstudio" />
+    </div>
+    <nav>
+      <a href="#projects">Projets</a>
+      <a href="#pricing">Tarifs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="headline">Une couverture qui vous ressemble</div>
+    <div class="typing" id="typing"></div>
+  </header>
+  
+
+  
+<section class="video-section">
+  <video id="scrollVideo" muted playsinline>
+    <source src="loogo.mp4" type="video/mp4" />
+    Ton navigateur ne supporte pas la vidéo.
+  </video>
+</section>
+
+
+
+
+  <section class="features">
+    <div class="features-list">
+      <div class="feature">Design sur-mesure</div>
+      <div class="feature">Animations avancées</div>
+      <div class="feature">Interface admin personnalisée</div>
+    </div>
+  </section>
+
+<section class="projects-section hidden">
+  <div class="projects-grid hidden">
+    <div class="project">
+      <img src="site.jpg" alt="Projet 1">
+      <div class="project-info">
+        <div class="project-title">Site Restaurant</div>
+        <div class="project-desc">Maquette haut de gamme 60k €</div>
+      </div>
+    </div>
+    <div class="project hidden">
+      <img src="site2.jpg" alt="Projet 2">
+      <div class="project-info">
+        <div class="project-title">Site Bar Vert</div>
+        <div class="project-desc">Design lumineux et moderne</div>
+      </div>
+    </div>
+    <!-- Ajoute d'autres projets ici -->
+  </div>
+</section>
+
+
+
+ <section class="pricing" id="pricing">
+  <h2>Tarifs</h2>
+  <div class="pricing-grid">
+    <div class="price-box">
+      <h3>Site vitrine</h3>
+      <p>À partir de <strong>800€</strong></p>
+    </div>
+    <div class="price-box">
+      <h3>Site pro avec interface admin</h3>
+      <p>À partir de <strong>1500€</strong></p>
+    </div>
+    <div class="price-box">
+      <h3>Offre sur mesure</h3>
+      <p>Contactez-nous pour un devis personnalisé</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contact</h2>
+  <form>
+    <input type="text" placeholder="Nom" required>
+    <input type="email" placeholder="Email" required>
+    <textarea rows="5" placeholder="Ton message" required></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+</section>
+
+
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll('.features, .projects, .pricing');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    sections.forEach(section => {
+      section.classList.add('hidden'); // départ caché
+      observer.observe(section);
+    });
+  });
+</script>
+
+<script>
+(() => {
+  const slider = document.querySelector('.projects-grid');
+  let isDown = false, startX, scrollLeft;
+
+  /* Souris */
+  slider.addEventListener('mousedown', e => {
+    isDown = true;
+    slider.classList.add('grabbing');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  window.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('grabbing'); });
+  slider.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.2;      // vitesse
+    slider.scrollLeft = scrollLeft - walk;
+  });
+
+  /* Tactile */
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].pageX;
+    scrollLeft = slider.scrollLeft;
+  }, {passive: true});
+
+  slider.addEventListener('touchmove', e => {
+    const x = e.touches[0].pageX;
+    const walk = (x - startX) * 1.2;
+    slider.scrollLeft = scrollLeft - walk;
+  }, {passive: true});
+})();
+</script>
+
+<script>
+  const features = document.querySelectorAll('.feature');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  features.forEach(el => observer.observe(el));
+</script>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrollThreshold = 50; // px, ajuste si besoin
+    const features = document.querySelector('.features');
+    const projects = document.querySelector('.projects-section');
+    const pricing = document.querySelector('.pricing');
+
+    if (window.scrollY > scrollThreshold) {
+      features.classList.add('visible');
+      features.classList.remove('hidden');
+      
+      projects.classList.add('visible');
+      projects.classList.remove('hidden');
+      
+      pricing.classList.add('visible');
+      pricing.classList.remove('hidden');
+    } else {
+      // si tu veux faire réapparaitre au scroll vers le haut
+      features.classList.remove('visible');
+      features.classList.add('hidden');
+      
+      projects.classList.remove('visible');
+      projects.classList.add('hidden');
+      
+      pricing.classList.remove('visible');
+      pricing.classList.add('hidden');
+    }
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('scrollVideo');
+  if (!video) return;
+
+  const source = document.createElement('source');
+  source.src = 'loogo.mp4';
+  source.type = 'video/mp4';
+
+  let hasLoaded = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasLoaded) {
+        video.appendChild(source);
+        video.load(); // charge la vidéo
+        video.play();
+        hasLoaded = true;
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(video);
+});
+</script>
+
+
+
+<script>
+  const phrases = ["Design unique.", "Expérience immersive.", "Impact garanti."];
+  let i = 0; // index de la phrase
+  let j = 0; // index de la lettre
+  let currentPhrase = [];
+  let isDeleting = false; // pour savoir si on efface ou écrit
+
+  const typingElement = document.getElementById('typing');
+
+  function type() {
+    if (i >= phrases.length) i = 0; // boucle sur les phrases
+    let fullText = phrases[i];
+
+    if (!isDeleting) {
+      currentPhrase.push(fullText[j]); // on ajoute une lettre
+      typingElement.textContent = currentPhrase.join('');
+      j++;
+
+      if (j === fullText.length) {
+        isDeleting = true; // on commence à effacer
+        setTimeout(type, 1500); // on attend un peu
+        return;
+      }
+    } else {
+      currentPhrase.pop(); // on retire une lettre
+      typingElement.textContent = currentPhrase.join('');
+      if (currentPhrase.length === 0) {
+        isDeleting = false;
+        i++; // phrase suivante
+        j = 0;
+      }
+    }
+
+    setTimeout(type, isDeleting ? 60 : 120); // vitesse écriture/effacement
+  }
+
+  type();
+</script>
+
+
+</body>
+
+<footer style="text-align:center; padding:2rem 1rem; color:#888;">
+  © 2025 .noa.webstudio — Design haut de gamme. Tous droits réservés.
+</footer>
+
+</html>
