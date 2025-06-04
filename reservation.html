@@ -101,9 +101,10 @@
 
     const client = new Client();
     client
-      .setEndpoint('https://fra.cloud.appwrite.io/v1') // 👉 remplace ça
-      .setProject('68405af5000bcab54b45');                  // 👉 et ça
-      .setKey('d1e2eb6be345b4c6d45c5f76d1a6d94f1d867f20ed7a5944c99ecaa301f0622ef14d0ab756f872814a4ef00a465c278ebd54915fe4da412b5b580b4d9fc954b4114f26f4b417818e038885743e7bdb7041cac44d90c837e9d19f00db94de330e64f846f00a50f1006d410556172ae9070fe23616f84eca8afcbf71ad25783897'); // 👈 AJOUTE CETTE LIGNE
+client
+  .setEndpoint('https://fra.cloud.appwrite.io/v1')
+  .setProject('68405af5000bcab54b45')
+  .setKey('d1e2eb6be345b4c6d45c5f76d1a6d94f1d867f20ed7a5944c99ecaa301f0622ef14d0ab756f872814a4ef00a465c278ebd54915fe4da412b5b580b4d9fc954b4114f26f4b417818e038885743e7bdb7041cac44d90c837e9d19f00db94de330e64f846f00a50f1006d410556172ae9070fe23616f84eca8afcbf71ad25783897');
 
     const databases = new Databases(client);
     const databaseId = '68405d540011fb76549ddefault'; // ou ton vrai ID
