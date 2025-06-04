@@ -96,41 +96,40 @@
   <div id="message"></div>
 
 
-  <script type="module">
-    import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
+ <script type="module">
+  import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
 
-    const client = new Client();
-    client
-client
-  .setEndpoint('https://fra.cloud.appwrite.io/v1')
-  .setProject('68405af5000bcab54b45')
-  .setKey('d1e2eb6be345b4c6d45c5f76d1a6d94f1d867f20ed7a5944c99ecaa301f0622ef14d0ab756f872814a4ef00a465c278ebd54915fe4da412b5b580b4d9fc954b4114f26f4b417818e038885743e7bdb7041cac44d90c837e9d19f00db94de330e64f846f00a50f1006d410556172ae9070fe23616f84eca8afcbf71ad25783897');
+  const client = new Client();
+  client
+    .setEndpoint('https://fra.cloud.appwrite.io/v1')
+    .setProject('68405af5000bcab54b45'); // pas besoin de setKey ici
 
-    const databases = new Databases(client);
-    const databaseId = '68405d540011fb76549ddefault'; // ou ton vrai ID
-    const collectionId = '68405dc8000d6a5fb575'; // ID exact
+  const databases = new Databases(client);
+  const databaseId = '68405d540011fb76549ddefault';
+  const collectionId = '68405dc8000d6a5fb575';
 
-    const form = document.getElementById('reservationForm');
-    const message = document.getElementById('message');
+  const form = document.getElementById('reservationForm');
+  const message = document.getElementById('message');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const data = {
-        name: form.name.value,
-        email: form.email.value,
-        date: form.date.value,
-        time: form.time.value,
-      };
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      date: form.date.value,
+      time: form.time.value,
+    };
 
-      try {
-        await databases.createDocument(databaseId, collectionId, 'unique()', data);
-        message.innerText = "✅ Réservation confirmée. Merci !";
-        form.reset();
-      } catch (error) {
-        message.innerText = "❌ Erreur lors de la réservation.";
-      }
-    });
-  </script>
+    try {
+      await databases.createDocument(databaseId, collectionId, 'unique()', data);
+      message.innerText = "✅ Réservation confirmée. Merci !";
+      form.reset();
+    } catch (error) {
+      message.innerText = "❌ Erreur lors de la réservation.";
+      console.error(error);
+    }
+  });
+</script>
 </body>
 </html>
