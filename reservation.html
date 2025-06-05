@@ -131,7 +131,6 @@ try {
         await databases.createDocument(databaseId, collectionId, 'unique()', data);
 
         // Envoi des données à Zapier
-        console.log("Envoi au webhook avec :", data);
         await fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
