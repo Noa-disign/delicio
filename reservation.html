@@ -113,14 +113,14 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Conversion de la date et de l'heure au bon format
+      // Conversion de la date et de l'heure au bon format : "YYYY-MM-DD HH:MM:SS"
       const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
       const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
 
       const data = {
-        tame: form.name.value,
-        tmail: form.email.value,
-        tate: formattedDate, // ex : "2025-06-05 19:30:00"
+        name: form.name.value,
+        email: form.email.value,
+        date: formattedDate, // ex : "2025-06-05 19:30:00"
         time: form.time.value
       };
 
