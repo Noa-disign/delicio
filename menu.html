@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu – Le Green Bar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background-color: #0e0e0e;
+      color: white;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 2px solid white;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .menu-section {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .menu-image {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+      margin-bottom: 50px;
+      cursor: pointer;
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+    }
+
+    /* Lightbox plein écran */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .menu-item {
+      background-color: #1b1b1b;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .menu-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .menu-desc {
+      font-size: 0.95rem;
+      color: #d0d0d0;
+      margin-bottom: 15px;
+    }
+
+    .menu-price {
+      font-size: 1rem;
+      color: #e0e0e0;
+      font-weight: bold;
+    }
+
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .menu-item {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Notre Carte</h1>
+  </header>
+
+  <div class="menu-section">
+    <!-- Image interactive -->
+    <img src="menu.png" alt="Carte du restaurant" class="menu-image" id="menuTrigger" />
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <img src="menu.png" alt="Carte en plein écran" />
+    </div>
+
+    <!-- Menu exemples -->
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-title">Tartare de Saumon</div>
+        <div class="menu-desc">Saumon frais, avocat, citron vert et coriandre.</div>
+        <div class="menu-price">18 €</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-title">Filet de Bœuf</div>
+        <div class="menu-desc">Jus maison, purée truffée.</div>
+        <div class="menu-price">26 €</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-title">Risotto Végétarien</div>
+        <div class="menu-desc">Riz crémeux, légumes grillés, parmesan.</div>
+        <div class="menu-price">17 €</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-title">Tiramisu Maison</div>
+        <div class="menu-desc">Mascarpone, café fort, cacao pur.</div>
+        <div class="menu-price">9 €</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const image = document.getElementById('menuTrigger');
+    const lightbox = document.getElementById('lightbox');
+
+    // Ouvre la lightbox
+    image.addEventListener('click', () => {
+      lightbox.classList.add('active');
+      image.style.transform = 'none'; // reset rotation
+    });
+
+    // Ferme la lightbox
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      setTimeout(() => {
+        image.style.transform = 'none';
+      }, 300);
+    });
+
+    // Effet d'inclinaison avec zoom automatique
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', function(event) {
+        const beta = event.beta;  // avant/arrière
+        const gamma = event.gamma; // gauche/droite
+
+        if (beta !== null && gamma !== null && !lightbox.classList.contains('active')) {
+          const rotateX = Math.min(Math.max((beta - 45), -30), 30); // limitation
+          const rotateY = Math.min(Math.max(gamma, -30), 30);
+
+          image.style.transform = `
+            perspective(800px)
+            rotateX(${-rotateX / 10}deg)
+            rotateY(${rotateY / 10}deg)
+            scale(1.015)
+          `;
+        }
+      }, true);
+    }
+  </script>
+</body>
+</html>

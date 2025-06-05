@@ -126,14 +126,26 @@
 
       console.log("Données envoyées à Appwrite :", data); // Debug
 
-      try {
-        await databases.createDocument(databaseId, collectionId, 'unique()', data);
-        message.innerText = "✅ Réservation confirmée. Merci !";
-        form.reset();
-      } catch (error) {
-        message.innerText = "❌ Erreur lors de la réservation.";
-        console.error("Erreur Appwrite :", error);
-      }
+try {
+  await databases.createDocument(databaseId, collectionId, 'unique()', data);
+
+  // Envoi des données à Zapier via webhook
+  await fetch('https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
+  message.innerText = "✅ Réservation confirmée. Merci !";
+  form.reset();
+} catch (error) {
+  message.innerText = "❌ Erreur lors de la réservation.";
+  console.error("Erreur Appwrite ou Zapier :", error);
+}
+
+      
     });
   </script>
 </body>
