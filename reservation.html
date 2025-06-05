@@ -95,41 +95,44 @@
   </form>
   <div id="message"></div>
 
+  <script type="module">
+    import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
 
- <script type="module">
-  import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
+    const client = new Client();
+    client
+      .setEndpoint('https://fra.cloud.appwrite.io/v1')
+      .setProject('68405af5000bcab54b45'); // Pas besoin de setKey pour un accès public
 
-  const client = new Client();
-  client
-    .setEndpoint('https://fra.cloud.appwrite.io/v1')
-    .setProject('68405af5000bcab54b45'); // pas besoin de setKey ici
+    const databases = new Databases(client);
+    const databaseId = '68405d540011fb76549d';
+    const collectionId = '68405dc8000d6a5fb575';
 
-  const databases = new Databases(client);
-  const databaseId = '68405d540011fb76549d';
-  const collectionId = '68405dc8000d6a5fb575';
+    const form = document.getElementById('reservationForm');
+    const message = document.getElementById('message');
 
-  const form = document.getElementById('reservationForm');
-  const message = document.getElementById('message');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+      // Conversion de la date et de l'heure au bon format
+      const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
+      const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
 
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      date: form.date.value,
-      time: form.time.value,
-    };
+      const data = {
+        Name: form.name.value,
+        Email: form.email.value,
+        Date: formattedDate, // ex : "2025-06-05 19:30:00"
+        Time: form.time.value
+      };
 
-    try {
-      await databases.createDocument(databaseId, collectionId, 'unique()', data);
-      message.innerText = "✅ Réservation confirmée. Merci !";
-      form.reset();
-    } catch (error) {
-      message.innerText = "❌ Erreur lors de la réservation.";
-      console.error(error);
-    }
-  });
-</script>
+      try {
+        await databases.createDocument(databaseId, collectionId, 'unique()', data);
+        message.innerText = "✅ Réservation confirmée. Merci !";
+        form.reset();
+      } catch (error) {
+        message.innerText = "❌ Erreur lors de la réservation.";
+        console.error(error);
+      }
+    });
+  </script>
 </body>
 </html>
