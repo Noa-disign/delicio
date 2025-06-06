@@ -98,10 +98,11 @@
   <script type="module">
     import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
 
+    // Initialisation Appwrite
     const client = new Client();
     client
       .setEndpoint('https://fra.cloud.appwrite.io/v1')
-      .setProject('68405af5000bcab54b45'); // Pas besoin de setKey
+      .setProject('68405af5000bcab54b45');
 
     const databases = new Databases(client);
     const databaseId = '68405d540011fb76549d';
@@ -113,26 +114,35 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Création de la date au format Appwrite "YYYY-MM-DD HH:MM:SS"
+      // Formatage de la date
       const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
       const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
 
+      // Données à envoyer
       const data = {
-        name: form.name.value,       // ✅ bien en minuscule
-        email: form.email.value,     // ✅ bien en minuscule
-        date: formattedDate,         // ✅ format attendu par Appwrite
-        time: form.time.value        // ✅ bien en minuscule
+        name: form.name.value,
+        email: form.email.value,
+        date: formattedDate,
+        time: form.time.value
       };
 
-      console.log("Données envoyées à Appwrite :", data); // Debug
-
       try {
+        // 1. Enregistrement dans Appwrite
         await databases.createDocument(databaseId, collectionId, 'unique()', data);
+
+        // 2. Envoi à Zapier via webhook
+        await fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        // Confirmation à l'utilisateur
         message.innerText = "✅ Réservation confirmée. Merci !";
         form.reset();
       } catch (error) {
         message.innerText = "❌ Erreur lors de la réservation.";
-        console.error("Erreur Appwrite :", error);
+        console.error("Erreur Appwrite ou Zapier :", error);
       }
     });
   </script>
