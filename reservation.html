@@ -126,33 +126,27 @@
         time: form.time.value
       };
 
-      try {
-  // Enregistrement dans Appwrite
+try {
+  // Étape 1 : créer le document dans Appwrite
   await databases.createDocument(databaseId, collectionId, 'unique()', data);
-  console.log("✅ Appwrite : réservation enregistrée");
+  console.log("✅ Document créé dans Appwrite");
 
-  // Envoi à Zapier
-  const zapierResponse = await fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
+  // Étape 2 : envoi à Zapier (sans casser le reste si ça échoue)
+  fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
-  });
+  })
+  .then(() => console.log("✅ Données envoyées à Zapier"))
+  .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
 
-  if (!zapierResponse.ok) {
-    throw new Error("❌ Zapier a renvoyé une erreur : " + zapierResponse.status);
-  }
-
+  // Message de confirmation
   message.innerText = "✅ Réservation confirmée. Merci !";
   form.reset();
+
 } catch (error) {
-  console.error("Erreur complète :", error);
-
-  // Essayons d'afficher tout ce qu'on peut sur l'erreur
-  let errorMessage = "Erreur inconnue";
-  if (error.message) errorMessage = error.message;
-  if (error.response && error.response.message) errorMessage = error.response.message;
-
-  message.innerText = "❌ Erreur : " + errorMessage;
+  console.error("❌ Erreur Appwrite :", error);
+  message.innerText = "❌ Erreur lors de la réservation.";
 }
 
 
