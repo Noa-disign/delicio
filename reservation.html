@@ -145,9 +145,16 @@
   message.innerText = "✅ Réservation confirmée. Merci !";
   form.reset();
 } catch (error) {
-  message.innerText = "❌ Erreur : " + error.message;
-  console.error(error);
+  console.error("Erreur complète :", error);
+
+  // Essayons d'afficher tout ce qu'on peut sur l'erreur
+  let errorMessage = "Erreur inconnue";
+  if (error.message) errorMessage = error.message;
+  if (error.response && error.response.message) errorMessage = error.response.message;
+
+  message.innerText = "❌ Erreur : " + errorMessage;
 }
+
 
     });
   </script>
