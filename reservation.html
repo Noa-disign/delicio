@@ -145,7 +145,7 @@
   message.innerText = "✅ Réservation confirmée. Merci !";
   form.reset();
 } catch (error) {
-  message.innerText = "❌ Erreur lors de la réservation.";
+  message.innerText = "❌ Erreur : " + error.message;
   console.error(error);
 }
 
