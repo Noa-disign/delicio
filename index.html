@@ -1126,27 +1126,12 @@ nav a:hover {
   }
 }
 
-  html, body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  overflow: hidden; /* empêche le scroll sur body = plus de "tirage vers le bas" */
-}
-
-.scroll-wrapper {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* scroll fluide sur iOS */
-}
-
+    
 
 
   </style>
 </head>
 <body>
-  <body>
-  <div class="scroll-wrapper">
-    <!-- Tout ton contenu ici -->
   <header>
     <h1>Delicio</h1>
     <div class="menu-toggle" id="menu-toggle">
@@ -1316,7 +1301,9 @@ nav a:hover {
   </div>
 </section>
 
-
+<body>
+  <div class="scroll-wrapper">
+    <!-- Tout ton contenu ici -->
   </div>
 </body>
 
