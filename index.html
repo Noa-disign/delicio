@@ -40,7 +40,6 @@
   }
 
 
-
   body {
     font-size: 4px !important;
     line-height: 1.4 !important;
@@ -51,39 +50,6 @@
     font-size: 34px !important;
   }
 }
-
-body {
-  overflow: hidden;
-  height: 100vh;
-}
-
-.scroll-container {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* pour le smooth scroll sur iOS */
-}
-
-  body, html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-.fixed-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/images/background.jpg') center/cover no-repeat;
-  z-index: -1;
-}
-
-.main-content {
-  position: relative;
-  z-index: 1;
-}
-
 
 
     header {
@@ -1160,7 +1126,19 @@ nav a:hover {
   }
 }
 
-    
+  html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden; /* empêche le scroll sur body = plus de "tirage vers le bas" */
+}
+
+.scroll-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* scroll fluide sur iOS */
+}
+
 
 
   </style>
@@ -1306,12 +1284,6 @@ nav a:hover {
   </div>
   </div>
 </section>
-
-<div class="fixed-bg"></div>
-<div class="main-content">
-  <!-- tout ton contenu ici -->
-</div>
-
   
 <div class="scroll-in">
 <section id="social-links">
@@ -1341,9 +1313,13 @@ nav a:hover {
   </div>
 </section>
 
-<div class="scroll-container">
-    <!-- tout ton contenu ici -->
+<body>
+  <div class="scroll-wrapper">
+    <!-- Tout ton contenu ici -->
   </div>
+</body>
+
+
 
 
 
