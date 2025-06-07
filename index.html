@@ -40,6 +40,29 @@
   }
 
 
+
+  body {
+    font-size: 4px !important;
+    line-height: 1.4 !important;
+  }
+}
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 34px !important;
+  }
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.scroll-container {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* pour le smooth scroll sur iOS */
+}
+
   body, html {
   margin: 0;
   padding: 0;
@@ -61,17 +84,6 @@
   z-index: 1;
 }
 
-
-  body {
-    font-size: 4px !important;
-    line-height: 1.4 !important;
-  }
-}
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 34px !important;
-  }
-}
 
 
     header {
@@ -1329,7 +1341,9 @@ nav a:hover {
   </div>
 </section>
 
-
+<div class="scroll-container">
+    <!-- tout ton contenu ici -->
+  </div>
 
 
 
