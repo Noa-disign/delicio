@@ -1126,7 +1126,13 @@ nav a:hover {
   }
 }
 
-    
+html, body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior-y: none; /* bloque le "pull-to-refresh" sur Android */
+  height: 100%;
+}
+
 
 
   </style>
@@ -1301,11 +1307,13 @@ nav a:hover {
   </div>
 </section>
 
-<body>
-  <div class="scroll-wrapper">
-    <!-- Tout ton contenu ici -->
-  </div>
-</body>
+<script>
+  document.addEventListener('touchmove', function(event) {
+    if (window.scrollY <= 0 && event.touches[0].clientY > 0) {
+      event.preventDefault();
+    }
+  }, { passive: false });
+</script>
 
 
 
