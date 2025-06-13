@@ -158,39 +158,40 @@ nav a:hover {
     outline: none;
   }
 
-  /* Bouton hamburger épuré et premium */
-  .menu-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 36px;
-    height: 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    z-index: 300;
-    background: transparent;
-    border: none;
-    padding: 0;
-    user-select: none;
-    filter: drop-shadow(0 0 3px rgba(255, 136, 0, 0.7));
-    transition: filter 0.3s ease;
-  }
+/* Bouton hamburger épuré et premium */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 300;
+  background: transparent;
+  border: none;
+  padding: 0;
+  user-select: none;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7)); /* vert sombre avec transparence */
+  transition: filter 0.3s ease;
+}
 
-  .menu-toggle:hover {
-    filter: drop-shadow(0 0 8px rgba(255, 136, 0, 1));
-  }
+.menu-toggle:hover {
+  filter: drop-shadow(0 0 8px rgb(0, 207, 0)); /* vert saturé au hover */
+}
 
-  .menu-toggle span {
-    display: block;
-    height: 4px;
-    width: 100%;
-    background-color: #ffa500;
-    border-radius: 3px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 8px rgba(255, 136, 0, 0.5);
-  }
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: #00c700; /* vert forêt, élégant et premium */
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5); /* ombre verte douce */
+}
+
 
   /* Animation du menu toggle quand actif (optionnel) */
   .menu-toggle.active span:nth-child(1) {
@@ -221,7 +222,7 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 70px;
 }
 
 
@@ -234,7 +235,7 @@ nav a:hover {
 
 .left-img {
   flex: none;
-  width: 50%;
+  width: 93%;
   aspect-ratio: 1 / 1; /* carré */
   border-radius: 20px;
   overflow: hidden;
@@ -277,6 +278,8 @@ nav a:hover {
   object-fit: cover;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+
 @media (max-width: 768px) {
   .interactive-gallery {
     flex-direction: column;
@@ -287,16 +290,28 @@ nav a:hover {
     box-sizing: border-box;
   }
 
-  .left-img {
-    position: relative; /* nécessaire pour positionner le texte */
-    width: 110%;
-    height: 100%;
-    aspect-ratio: unset;
-    border-radius: 20px;
-    margin-left: -5%;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(155, 155, 155, 0.253);
-  }
+ .left-img {
+  position: relative; /* déjà présent, nécessaire */
+  /* tes autres styles */
+  width: 110%;
+  height: 100%;
+  aspect-ratio: unset;
+  border-radius: 20px;
+  margin-left: -10px;
+  margin-top: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(155, 155, 155, 0.253);
+}
+
+/* Overlay sombre */
+.left-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1; /* en dessous du texte qui est en z-index: 2 */
+  pointer-events: none; /* pour ne pas bloquer les clics */
+}
+
 
   .right-stack {
     display: none;
@@ -308,16 +323,102 @@ nav a:hover {
     object-fit: cover;
   }
 
-  .left-img .img-text {
-    position: absolute;
-    bottom: 30px;
-    left: 20px;
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-    z-index: 2;
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&family=Montserrat:wght@600&display=swap');
+
+.left-img {
+  position: relative; /* nécessaire pour les enfants en absolute */
+  overflow: hidden; /* pour bien gérer le flou */
+}
+.left-img .img-text-main {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform-style: preserve-3d;
+  width: 150vw;  /* pour dépasser sur les côtés */
+  transform: translateX(-50%) rotateY(-20deg);
+
+  font-size: 50px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  color: #c0ffc2; /* vert vif */
+
+  /* Effet 3D épais avec plusieurs couches d'ombre pour simuler une extrusion */
+  text-shadow:
+    1px 1px 0 #3a5f33,
+    2px 2px 0 #2e4a27,
+    3px 3px 0 #22351a,
+    4px 4px 0 #18220e,
+    5px 5px 10px rgba(0, 0, 0, 0.8);
+
+  letter-spacing: 3px;
+  white-space: nowrap;
+  z-index: 10;
+  text-align: center;
+
+  /* Animation fade-in avec légère translation verticale */
+  opacity: 0;
+  animation: fadeSlideDown 1s forwards ease-out 0.3s;
+}
+
+/* Animation */
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-30px) rotateY(-20deg);
   }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotateY(-20deg);
+  }
+
+}
+
+.left-img .img-text-sub {
+  position: absolute;
+  top: calc(25% + 65px);
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translateX(-50%) rotateY(-20deg);
+
+  font-size: 26px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #c0ffc2;
+
+  text-shadow:
+    1px 1px 0 #3a5f33,
+    2px 2px 0 #2e4a27,
+    3px 3px 0 #22351a,
+    4px 4px 0 #18220e,
+    5px 5px 10px rgba(0, 0, 0, 0.8);
+
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+  z-index: 10;
+  text-align: center;
+
+  /* Animation fade-in coordonnée avec le titre */
+  opacity: 0;
+  animation: fadeSlideUp 1s forwards ease-out 0.6s;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px) rotateY(-20deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotateY(-20deg);
+  }
+}
+
+
 
   .left-img:hover,
   .left-img img:hover {
@@ -326,8 +427,52 @@ nav a:hover {
     transition: none !important;
     box-shadow: none !important;
   }
+
+  .left-img .cta-btn {
+    position: relative;
+    bottom: 70px;
+    left: 20px;
+    padding: 10px 20px;
+    font-weight: 600;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+.cta-btn {
+  position: relative;
+  bottom: 20px;
+  left: 20px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  background: linear-gradient(135deg, #50b37d, #2d8f68);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #58c68a, #34a67a);
+}
+.cta-btn {
+  background: rgba(255, 0, 0, 0.8);
+}
+
+}
 
 
 
@@ -356,7 +501,7 @@ nav a:hover {
   display: block;
   width: 80px;
   height: 4px;
-  background: #ff8800;
+  background: #00c700;
   margin: 25px auto 0;
   border-radius: 2px;
 }
@@ -479,7 +624,7 @@ nav a:hover {
   font-size: 30px;
   margin-bottom: 12px;
   font-family: 'Playfair Display', serif;
-  color: #ffa034;
+  color: #56c722;
   text-shadow: 1px 1px 0 #000;
 }
 
@@ -579,7 +724,7 @@ nav a:hover {
   display: block;
   width: 60px;
   height: 4px;
-  background: #ff8800;
+  background: #00c700;
   margin: 20px auto 0;
   border-radius: 2px;
 }
@@ -666,7 +811,7 @@ nav a:hover {
   height: 100%;
   width: 0;
   border-radius: 15px;
-  background-color: #e063ffb7;
+  background-color: #008b0cb7;
   z-index: -1;
   box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
   transition: all 250ms;
@@ -712,6 +857,12 @@ nav a:hover {
   user-select: none;
 }
 
+@media screen and (max-width: 768px) {
+  .bottom-logo {
+    display: none !important;
+  }
+}
+
 
 .img-button {
   position: relative;
@@ -730,11 +881,12 @@ nav a:hover {
   font-size: 45px;
   font-weight: 600;
   margin-bottom: 20px;
+  margin-top: -30px;
   text-shadow: 0 0 9px rgb(0, 0, 0)
 }
 
 .hero-button {
-  background-color: #dc52ff;
+  background-color: #008106;
   font-size: 20px;
   color: white;
   padding: 10px 20px;
@@ -766,7 +918,7 @@ nav a:hover {
   display: block;
   width: 80px;
   height: 5px;
-  background: #ff8800;
+  background: #00c700;
   margin: 25px auto 0;
   border-radius: 2px;
 }
@@ -804,7 +956,7 @@ nav a:hover {
   margin-top: 20px;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #ff8800;
+  color:#00c700;
   font-family: 'Playfair Display', serif;
 }
 
@@ -832,7 +984,7 @@ nav a:hover {
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ff8800;
+  border: 2px solid #00c700;
 }
 
 .author span {
@@ -843,7 +995,7 @@ nav a:hover {
 
 
 .hero-button:hover {
-  background-color: #730492;
+  background-color: #0f5a00;
 }
 
 
@@ -878,17 +1030,17 @@ nav a:hover {
   border-radius: 50%;
   width: 70px;
   height: 70px;
-  color: #ffa500; /* orange doux */
+  color: #00c700; /* orange doux */
   transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   text-decoration: none;
 }
 
 .social-card a:hover {
-  background-color: #ffa500;
+  background-color: #00c700;
   color: #fff;
   transform: scale(1.15);
-  box-shadow: 0 8px 25px rgba(255, 165, 0, 0.6);
+  box-shadow: 0 8px 25px rgba(16, 138, 12, 0.6);
 }
 
 .icon {
@@ -1109,7 +1261,7 @@ nav a:hover {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background-color: #d68b00;
+    background-color: #008f18;
     color: #fff;
     padding: 14px 22px;
     border-radius: 30px;
@@ -1122,7 +1274,7 @@ nav a:hover {
   }
 
   .floating-btn:hover {
-    background-color: #730492;
+    background-color: #005200;
   }
 }
 
@@ -1153,10 +1305,16 @@ nav a:hover {
   </header>
 
 <section class="hero">
-  <div class="interactive-gallery">
-    <div class="img-button left-img" data-label="Mes projets">
-      <img src="restaurant.jpg" alt="Projet" style="width:100%; height:100%; object-fit: cover;">
-    </div>
+<div class="interactive-gallery">
+  <div class="img-button left-img">
+    <img src="blockk.png" alt="Projet" style="width:100%; height:100%; object-fit: cover;">
+
+    <div class="img-text-main">le [block]</div>
+    <div class="img-text-sub">Bar, resto et sport</div>
+    <button class="cta-btn2">Voir plus</button>
+  </div>
+</div>
+  </div>
     <div class="right-stack">
       <div class="img-button right-img" data-label="Autre chose">
         <img src="serveur.jpg" alt="Option 1" style="width:100%; height:100%; object-fit: cover;">

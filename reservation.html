@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Réservation | Delicio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
       box-sizing: border-box;
     }
+
+  
 
     body {
       background-color: #000;
@@ -19,39 +20,67 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       padding: 80px 20px;
       min-height: 100vh;
+      font-family: 'Inter', sans-serif;
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      font-weight: 600;
-      text-align: center;
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #baff9c;
+      letter-spacing: 1.5px;
+      margin-bottom: 50px;
+      text-shadow: 2px 2px 10px rgba(144, 255, 167, 0.3);
+      transform: rotateY(-10deg);
     }
 
     form {
+      background: rgba(15, 15, 15, 0.85);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 0 0 40px rgba(152, 255, 173, 0.15);
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      background: #111;
-      padding: 40px;
-      border-radius: 20px;
+      gap: 25px;
       max-width: 500px;
       width: 100%;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      transform: perspective(800px) rotateX(0deg) rotateY(-5deg);
+      border: 1px solid rgba(144, 255, 167, 0.05);
+      opacity: 0;
+      animation: fadeIn 1s forwards ease-out 0.3s;
     }
 
     input, button {
-      padding: 15px;
+      padding: 18px;
       font-size: 1rem;
-      border: none;
-      border-radius: 12px;
+      border-radius: 14px;
+      font-family: 'Inter', sans-serif;
     }
 
     input {
       background-color: #1a1a1a;
-      color: white;
+      color: #d0ffd8;
+      border: none;
+      border-bottom: 2px solid #2e4a27;
+      box-shadow: inset 0 0 5px rgba(91, 255, 140, 0.15);
+      transition: border-color 0.3s ease;
+      padding-right: 40px;
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 20px;
+    }
+
+    input:focus {
+      outline: none;
+      border-bottom: 2px solid #a4ffba;
+    }
+
+    input:valid {
+      background-image: url('data:image/svg+xml;utf8,<svg fill="lightgreen" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.2l-3.5-3.5L4 14.2l5 5L20 8.2l-1.4-1.4z"/></svg>');
     }
 
     input::placeholder {
@@ -59,27 +88,59 @@
     }
 
     button {
-      background-color: white;
-      color: black;
-      font-weight: 600;
+      background: linear-gradient(to right, #baff9c, #ffffff);
+      color: #000;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 20px rgba(144, 255, 167, 0.2);
     }
 
     button:hover {
-      background-color: #e5e5e5;
+      transform: scale(1.03);
+      box-shadow: 0 8px 25px rgba(144, 255, 167, 0.35);
+    }
+
+    button:active {
+      background: linear-gradient(to right, #9bdc91, #e6ffe2);
+      transform: scale(0.98);
     }
 
     #message {
-      margin-top: 20px;
-      font-size: 0.95rem;
-      color: #ccc;
+      margin-top: 25px;
+      font-size: 1rem;
+      color: #98ffae;
       text-align: center;
+    }
+
+    form.error {
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-6px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: perspective(800px) rotateX(0deg) rotateY(-5deg);
+      }
     }
 
     @media (max-width: 600px) {
       form {
         padding: 30px 20px;
+        transform: none;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
       }
     }
   </style>
@@ -98,12 +159,8 @@
   <script type="module">
     import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
 
-    // Initialisation Appwrite
     const client = new Client();
-    client
-      .setEndpoint('https://fra.cloud.appwrite.io/v1')
-      .setProject('68405af5000bcab54b45');
-
+    client.setEndpoint('https://fra.cloud.appwrite.io/v1').setProject('68405af5000bcab54b45');
     const databases = new Databases(client);
     const databaseId = '68405d540011fb76549d';
     const collectionId = '68405dc8000d6a5fb575';
@@ -113,12 +170,9 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // Formatage de la date
       const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
       const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
 
-      // Données à envoyer
       const data = {
         name: form.name.value,
         email: form.email.value,
@@ -126,32 +180,28 @@
         time: form.time.value
       };
 
-try {
-  // Étape 1 : créer le document dans Appwrite
-  await databases.createDocument(databaseId, collectionId, 'unique()', data);
-  console.log("✅ Document créé dans Appwrite");
+      try {
+        await databases.createDocument(databaseId, collectionId, 'unique()', data);
+        console.log("✅ Document créé dans Appwrite");
 
-  // Étape 2 : envoi à Zapier (sans casser le reste si ça échoue)
-  fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  })
-  .then(() => console.log("✅ Données envoyées à Zapier"))
-  .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
+        fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        })
+        .then(() => console.log("✅ Données envoyées à Zapier"))
+        .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
 
-  // Message de confirmation
-  message.innerText = "✅ Réservation confirmée. Merci !";
-  form.reset();
+        message.innerText = "✅ Réservation confirmée. Merci !";
+        form.reset();
 
-} catch (error) {
-  console.error("❌ Erreur Appwrite :", error);
-  message.innerText = "❌ Erreur lors de la réservation.";
-}
-
-
+      } catch (error) {
+        console.error("❌ Erreur Appwrite :", error);
+        message.innerText = "❌ Erreur lors de la réservation.";
+        form.classList.add('error');
+        setTimeout(() => form.classList.remove('error'), 400);
+      }
     });
   </script>
 </body>
-
 </html>
