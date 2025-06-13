@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nous Trouver - Le Green Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section#nous-trouver {
+      padding: 160px 80px;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 30px;
+    }
+
+    #nous-trouver h3 {
+      font-size: 56px;
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    #nous-trouver h3::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 5px;
+      background: #00c700;
+      margin: 25px auto 0;
+      border-radius: 2px;
+    }
+
+    .carte-et-infos {
+      display: flex;
+      gap: 60px;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .map {
+      border: none;
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 199, 0, 0.3);
+    }
+
+    .infos-contact {
+      background: rgba(20, 20, 20, 0.85);
+      padding: 40px;
+      border-radius: 20px;
+      color: #eee;
+      max-width: 400px;
+      flex: 1 1 300px;
+      box-shadow:
+        0 0px 10px rgba(48, 48, 48, 0.7),
+        0 0 30px #ffffff15;
+      transition: transform 0.3s ease;
+    }
+
+    .infos-contact:hover {
+      transform: translateY(-5px);
+    }
+
+    .infos-contact h4 {
+      font-size: 1.8rem;
+      color: #00c700;
+      margin-bottom: 20px;
+    }
+
+    .infos-contact p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      color: #ccc;
+    }
+
+    .btn-waze {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 28px;
+      background-color: #00c700;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 30px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 199, 0, 0.3);
+    }
+
+    .btn-waze:hover {
+      background-color: #0f5a00;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+      background: #111;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 100px;
+    }
+
+    /* Responsive tablette */
+    @media (max-width: 1024px) {
+      #nous-trouver {
+        padding: 120px 40px;
+      }
+
+      #nous-trouver h3 {
+        font-size: 42px;
+      }
+
+      .map {
+        height: 350px;
+      }
+
+      .btn-waze {
+        font-size: 15px;
+        padding: 10px 24px;
+      }
+    }
+
+    /* Responsive mobile */
+    @media (max-width: 768px) {
+      #nous-trouver {
+        padding: 100px 30px;
+      }
+
+      #nous-trouver h3 {
+        font-size: 32px;
+      }
+
+      .carte-et-infos {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .map, .infos-contact {
+        max-width: 100%;
+      }
+
+      .infos-contact {
+        text-align: center;
+      }
+
+      .btn-waze {
+        width: 100%;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="nous-trouver">
+    <div class="container">
+      <h3>Nous Trouver</h3>
+      <div class="carte-et-infos">
+        <iframe
+          class="map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.337334031129!2d2.352222715675049!3d48.85661407928768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671d8772eac45%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1710000000000"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+        <div class="infos-contact">
+          <h4>Le Green Bar</h4>
+          <p>📍 21 Avenue des Étoiles, 75000 Paris</p>
+          <p>📞 01 23 45 67 89</p>
+          <p>📧 contact@greenbar.fr</p>
+          <p>🕐 Ouvert de 17h à 1h, tous les jours</p>
+
+          <a class="btn-waze"
+             href="https://waze.com/ul?ll=48.856614,2.3522219&navigate=yes"
+             target="_blank"
+             rel="noopener noreferrer">
+             🚗 S'y rendre avec Waze
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    &copy; 2025 Le Green Bar. Tous droits réservés.
+  </div>
+
+</body>
+</html>

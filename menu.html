@@ -3,209 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu – Le Green Bar</title>
+  <title>Menu - Le Green Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Helvetica Neue', sans-serif;
     }
 
     body {
-      background-color: #0e0e0e;
-      color: white;
-      padding: 40px 20px;
-      line-height: 1.6;
+      background-color: #0a0a0a;
+      font-family: 'Playfair Display', serif;
+      color: #fff;
     }
 
-    header {
+    section.menu-section {
+      padding: 120px 40px;
       text-align: center;
-      margin-bottom: 60px;
     }
 
-    h1 {
-      font-size: 2.8rem;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border-bottom: 2px solid white;
-      display: inline-block;
-      padding-bottom: 10px;
+    .menu-title {
+      font-size: 58px;
+      margin-bottom: 20px;
+      position: relative;
     }
 
-    .menu-section {
+    .menu-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 5px;
+      background: #00c700;
+      margin: 20px auto 40px;
+      border-radius: 2px;
+    }
+
+    .menu-frame {
+      padding: 20px;
+      border: 1px solid #00c70033;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #0f0f0f, #080808);
+      box-shadow:
+        0 0px 10px rgba(48, 48, 48, 0.7),
+        0 0 25px #00c70011;
       max-width: 1000px;
       margin: 0 auto;
     }
 
-    .menu-image {
+    .menu-frame img {
       width: 100%;
-      height: auto;
-      max-height: 500px;
-      object-fit: cover;
       border-radius: 20px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-      margin-bottom: 50px;
       cursor: pointer;
-      transition: transform 0.2s ease-out;
-      will-change: transform;
-    }
-
-    /* Lightbox plein écran */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 15px;
-      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
-    }
-
-    .lightbox.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .menu-item {
-      background-color: #1b1b1b;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 5px 20px rgba(0, 199, 0, 0.1);
       transition: transform 0.3s ease;
     }
 
-    .menu-item:hover {
-      transform: translateY(-5px);
+    .menu-frame img:hover {
+      transform: scale(1.01);
     }
 
-    .menu-title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #ffffff;
+    /* LIGHTBOX FULLSCREEN */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
     }
 
-    .menu-desc {
-      font-size: 0.95rem;
-      color: #d0d0d0;
-      margin-bottom: 15px;
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 199, 0, 0.2);
+      transition: 0.3s ease;
     }
 
-    .menu-price {
-      font-size: 1rem;
-      color: #e0e0e0;
-      font-weight: bold;
+    .lightbox.active {
+      display: flex;
     }
 
-    @media screen and (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
+    /* Paysage forcé simulé sur mobile portrait */
+    @media screen and (max-width: 768px) and (orientation: portrait) {
+      .lightbox img {
+        transform: rotate(90deg);
+        max-width: none;
+        height: 90vh;
+        width: auto;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      section.menu-section {
+        padding: 100px 20px;
       }
 
-      .menu-item {
-        padding: 20px;
+      .menu-title {
+        font-size: 42px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section.menu-section {
+        padding: 80px 15px;
+      }
+
+      .menu-title {
+        font-size: 32px;
+      }
+
+      .menu-frame {
+        padding: 10px;
+        border-radius: 20px;
+      }
+
+      .menu-frame img {
+        border-radius: 12px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Notre Carte</h1>
-  </header>
-
-  <div class="menu-section">
-    <!-- Image interactive -->
-    <img src="menu.png" alt="Carte du restaurant" class="menu-image" id="menuTrigger" />
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-      <img src="menu.png" alt="Carte en plein écran" />
+  <section class="menu-section">
+    <h1 class="menu-title">Notre Menu</h1>
+    <div class="menu-frame">
+      <img src="menu.png" alt="Carte du restaurant" id="menuImage">
     </div>
+  </section>
 
-    <!-- Menu exemples -->
-    <div class="menu-grid">
-      <div class="menu-item">
-        <div class="menu-title">Tartare de Saumon</div>
-        <div class="menu-desc">Saumon frais, avocat, citron vert et coriandre.</div>
-        <div class="menu-price">18 €</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-title">Filet de Bœuf</div>
-        <div class="menu-desc">Jus maison, purée truffée.</div>
-        <div class="menu-price">26 €</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-title">Risotto Végétarien</div>
-        <div class="menu-desc">Riz crémeux, légumes grillés, parmesan.</div>
-        <div class="menu-price">17 €</div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-title">Tiramisu Maison</div>
-        <div class="menu-desc">Mascarpone, café fort, cacao pur.</div>
-        <div class="menu-price">9 €</div>
-      </div>
-    </div>
+  <!-- Lightbox fullscreen -->
+  <div class="lightbox" id="lightbox">
+    <img src="menu.png" alt="Carte zoom">
   </div>
 
   <script>
-    const image = document.getElementById('menuTrigger');
+    const img = document.getElementById('menuImage');
     const lightbox = document.getElementById('lightbox');
 
-    // Ouvre la lightbox
-    image.addEventListener('click', () => {
+    img.addEventListener('click', () => {
       lightbox.classList.add('active');
-      image.style.transform = 'none'; // reset rotation
     });
 
-    // Ferme la lightbox
     lightbox.addEventListener('click', () => {
       lightbox.classList.remove('active');
-      setTimeout(() => {
-        image.style.transform = 'none';
-      }, 300);
     });
-
-    // Effet d'inclinaison avec zoom automatique
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', function(event) {
-        const beta = event.beta;  // avant/arrière
-        const gamma = event.gamma; // gauche/droite
-
-        if (beta !== null && gamma !== null && !lightbox.classList.contains('active')) {
-          const rotateX = Math.min(Math.max((beta - 45), -30), 30); // limitation
-          const rotateY = Math.min(Math.max(gamma, -30), 30);
-
-          image.style.transform = `
-            perspective(800px)
-            rotateX(${-rotateX / 10}deg)
-            rotateY(${rotateY / 10}deg)
-            scale(1.015)
-          `;
-        }
-      }, true);
-    }
   </script>
+
 </body>
 </html>
