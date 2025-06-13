@@ -2,68 +2,58 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Menu - Le Green Bar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
     }
-
     body {
-      background-color: #0a0a0a;
-      font-family: 'Playfair Display', serif;
+      background: #0a0a0a;
       color: #fff;
-    }
-
-    section.menu-section {
-      padding: 120px 40px;
+      font-family: 'Playfair Display', serif;
       text-align: center;
+      padding: 60px 20px;
     }
-
-    .menu-title {
-      font-size: 58px;
-      margin-bottom: 20px;
+    h1.menu-title {
+      font-size: 36px;
+      margin-bottom: 15px;
       position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
     }
-
-    .menu-title::after {
+    h1.menu-title::after {
       content: "";
       display: block;
-      width: 80px;
-      height: 5px;
+      width: 50px;
+      height: 4px;
       background: #00c700;
-      margin: 20px auto 40px;
+      margin: 8px auto 0;
       border-radius: 2px;
     }
-
     .menu-frame {
-      padding: 20px;
-      border: 1px solid #00c70033;
-      border-radius: 30px;
-      background: linear-gradient(145deg, #0f0f0f, #080808);
-      box-shadow:
-        0 0px 10px rgba(48, 48, 48, 0.7),
-        0 0 25px #00c70011;
-      max-width: 1000px;
+      max-width: 400px;
       margin: 0 auto;
+      padding: 12px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #0f0f0f, #080808);
+      box-shadow: 0 0 12px #00c700aa;
+      border: 1px solid #00c70055;
     }
-
     .menu-frame img {
       width: 100%;
-      border-radius: 20px;
+      border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 5px 20px rgba(0, 199, 0, 0.1);
-      transition: transform 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0, 199, 0, 0.15);
+      transition: transform 0.2s ease;
     }
-
     .menu-frame img:hover {
-      transform: scale(1.01);
+      transform: scale(1.02);
     }
 
-    /* LIGHTBOX FULLSCREEN */
+    /* Lightbox fullscreen */
     .lightbox {
       display: none;
       position: fixed;
@@ -74,84 +64,44 @@
       align-items: center;
       z-index: 9999;
     }
-
-    .lightbox img {
-      max-width: 90vw;
-      max-height: 90vh;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(0, 199, 0, 0.2);
-      transition: 0.3s ease;
-    }
-
     .lightbox.active {
       display: flex;
     }
-
-    /* Paysage forcé simulé sur mobile portrait */
-    @media screen and (max-width: 768px) and (orientation: portrait) {
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00c700bb;
+      transition: 0.3s ease;
+    }
+    /* Rotate image in portrait mode on mobile, keep it inside screen */
+    @media (max-width: 768px) and (orientation: portrait) {
       .lightbox img {
         transform: rotate(90deg);
-        max-width: none;
-        height: 90vh;
+        max-width: 90vh; /* largeur max = hauteur de l'écran */
+        max-height: 90vw; /* hauteur max = largeur de l'écran */
         width: auto;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      section.menu-section {
-        padding: 100px 20px;
-      }
-
-      .menu-title {
-        font-size: 42px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      section.menu-section {
-        padding: 80px 15px;
-      }
-
-      .menu-title {
-        font-size: 32px;
-      }
-
-      .menu-frame {
-        padding: 10px;
-        border-radius: 20px;
-      }
-
-      .menu-frame img {
-        border-radius: 12px;
+        height: auto;
       }
     }
   </style>
 </head>
 <body>
 
-  <section class="menu-section">
-    <h1 class="menu-title">Notre Menu</h1>
-    <div class="menu-frame">
-      <img src="menu.png" alt="Carte du restaurant" id="menuImage">
-    </div>
-  </section>
+  <h1 class="menu-title">Notre Menu</h1>
+  <div class="menu-frame">
+    <img src="menu.png" alt="Carte du restaurant" id="menuImage" />
+  </div>
 
-  <!-- Lightbox fullscreen -->
   <div class="lightbox" id="lightbox">
-    <img src="menu.png" alt="Carte zoom">
+    <img src="menu.png" alt="Carte agrandie" />
   </div>
 
   <script>
     const img = document.getElementById('menuImage');
     const lightbox = document.getElementById('lightbox');
-
-    img.addEventListener('click', () => {
-      lightbox.classList.add('active');
-    });
-
-    lightbox.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-    });
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+    img.addEventListener('click', () => lightbox.classList.add('active'));
   </script>
 
 </body>
