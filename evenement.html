@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Événements Sportifs - Le Green Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .event-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .event-card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 25px 30px;
+      transition: all 0.3s ease;
+    }
+
+    .event-card:hover {
+      border-color: #fff;
+      background: #181818;
+    }
+
+    .event-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .event-date {
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    .no-events {
+      font-size: 1.2rem;
+      color: #888;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    @media (min-width: 700px) {
+      .event-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📺 Matchs diffusés prochainement</h1>
+
+  <div class="event-list" id="events">
+    <!-- Exemple d’événements -->
+    <div class="event-card">
+      <div class="event-title">France 🇫🇷 vs Espagne 🇪🇸</div>
+      <div class="event-date">Vendredi 21 juin — 20h45</div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-title">Italie 🇮🇹 vs Allemagne 🇩🇪</div>
+      <div class="event-date">Samedi 22 juin — 21h00</div>
+    </div>
+  </div>
+
+  <!-- Si aucun événement -->
+  <!-- <div class="no-events">Aucun match prévu pour le moment.</div> -->
+
+</body>
+</html>

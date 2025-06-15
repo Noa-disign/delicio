@@ -14,17 +14,19 @@
 
   
 
-    body {
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 20px;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-    }
+body {
+  background: 
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+    url('blockk.png') center center/cover no-repeat fixed;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
 
     h1 {
       font-size: 3rem;
@@ -117,6 +119,106 @@
       animation: shake 0.4s ease;
     }
 
+    @media (max-width: 600px) {
+  .menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 300;
+    background: transparent;
+    border: none;
+    padding: 0;
+    user-select: none;
+    filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7));
+    transition: filter 0.3s ease;
+  }
+  .menu-toggle:hover {
+    filter: drop-shadow(0 0 8px rgb(0, 207, 0));
+  }
+  .menu-toggle span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: #00c700;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5);
+  }
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+  nav {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 20px 30px;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    z-index: 210;
+    min-width: 240px;
+    max-width: 320px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform-origin: top right;
+    will-change: transform, opacity;
+  }
+  nav.active {
+    display: flex !important;
+    opacity: 1;
+    transform: scale(1);
+  }
+  nav:not(.active) {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+  }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background-color: #ffffff;
+    color: #000;
+    outline: none;
+  }
+}
+
     @keyframes shake {
       0% { transform: translateX(0); }
       25% { transform: translateX(-6px); }
@@ -146,6 +248,22 @@
   </style>
 </head>
 <body>
+
+  <!-- ...existing code... -->
+<div class="menu-toggle" id="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav>
+  <ul>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#reservations">Réservations</a></li>
+  </ul>
+</nav>
+<!-- ...existing code... -->
   <h1>Réserve ta table</h1>
   <form id="reservationForm">
     <input type="text" id="name" name="name" placeholder="Ton nom" required />
@@ -203,5 +321,47 @@
       }
     });
   </script>
+
+  <script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.querySelector('nav');
+
+  function toggleMenu() {
+    const isActive = nav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isActive);
+
+    if (isActive) {
+      const firstLink = nav.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      menuToggle.focus();
+    }
+  }
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  document.addEventListener('click', (e) => {
+    if (
+      nav.classList.contains('active') &&
+      !nav.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuToggle.focus();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('active')) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuToggle.focus();
+    }
+  });
+</script>
 </body>
 </html>
