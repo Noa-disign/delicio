@@ -7,201 +7,158 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    body {
+    body, html {
+      height: 100%;
       font-family: 'Playfair Display', serif;
-      background-color: #0a0a0a;
       color: #fff;
-      line-height: 1.6;
+      background-color: #0a0a0a;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    section#nous-trouver {
-      padding: 160px 80px;
-      background: rgba(0, 0, 0, 0.85);
-      border-radius: 30px;
-    }
-
-    #nous-trouver h3 {
-      font-size: 56px;
-      text-align: center;
-      margin-bottom: 80px;
+    .hero {
+      background: url('bloc2.png') center center / cover no-repeat;
+      height: 100vh;
       position: relative;
-    }
-
-    #nous-trouver h3::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 5px;
-      background: #00c700;
-      margin: 25px auto 0;
-      border-radius: 2px;
-    }
-
-    .carte-et-infos {
       display: flex;
-      gap: 60px;
+      flex-direction: column;
       justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-    }
-
-    .map {
-      border: none;
-      width: 100%;
-      max-width: 600px;
-      height: 400px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 199, 0, 0.3);
-    }
-
-    .infos-contact {
-      background: rgba(20, 20, 20, 0.85);
+      align-items: center;
+      text-align: center;
       padding: 40px;
-      border-radius: 20px;
-      color: #eee;
-      max-width: 400px;
-      flex: 1 1 300px;
-      box-shadow:
-        0 0px 10px rgba(48, 48, 48, 0.7),
-        0 0 30px #ffffff15;
-      transition: transform 0.3s ease;
     }
 
-    .infos-contact:hover {
-      transform: translateY(-5px);
+@keyframes zoomBackground {
+  0% {
+    background-size: 100%;
+  }
+  100% {
+    background-size: 105%;
+  }
+}
+
+.btn-waze {
+  position: relative;
+  display: inline-block;
+  background: rgba(0, 199, 0, 0.1);
+  color: #ffffff;
+  font-weight: bold;
+  padding: 18px 48px;
+  font-size: 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 25px rgba(0, 199, 0, 0.2), inset 0 0 10px rgba(0, 199, 0, 0.1);
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.btn-waze::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 199, 0, 0.2) 10%, transparent 80%);
+  animation: pulse-glow 4s infinite;
+  z-index: 0;
+}
+
+.btn-waze span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-waze:hover {
+  color: #000;
+  background-color: #00c700;
+  transform: scale(1.08);
+  box-shadow: 0 0 40px #00ff7b, inset 0 0 10px #006b2b;
+}
+
+@keyframes pulse-glow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.4;
+  }
+}
+
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.295);
+      z-index: 1;
     }
 
-    .infos-contact h4 {
-      font-size: 1.8rem;
-      color: #00c700;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 64px;
       margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 4px 10px rgba(0, 199, 0, 0.5);
     }
 
-    .infos-contact p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 12px;
+    .hero p {
+      font-size: 22px;
+      margin-bottom: 40px;
       color: #ccc;
     }
 
-    .btn-waze {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 28px;
-      background-color: #00c700;
-      color: #000;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 30px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 199, 0, 0.3);
-    }
 
-    .btn-waze:hover {
-      background-color: #0f5a00;
-      color: #fff;
-      transform: scale(1.05);
-    }
-
-    /* Footer */
     .footer {
-      background: #111;
+      background: #0a0a0a;
       text-align: center;
-      padding: 40px 20px;
+      padding: 30px 20px;
       font-size: 14px;
       color: #aaa;
-      margin-top: 100px;
     }
 
-    /* Responsive tablette */
-    @media (max-width: 1024px) {
-      #nous-trouver {
-        padding: 120px 40px;
-      }
-
-      #nous-trouver h3 {
-        font-size: 42px;
-      }
-
-      .map {
-        height: 350px;
-      }
-
-      .btn-waze {
-        font-size: 15px;
-        padding: 10px 24px;
-      }
-    }
-
-    /* Responsive mobile */
     @media (max-width: 768px) {
-      #nous-trouver {
-        padding: 100px 30px;
+      .hero h1 {
+        font-size: 40px;
       }
 
-      #nous-trouver h3 {
-        font-size: 32px;
-      }
-
-      .carte-et-infos {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .map, .infos-contact {
-        max-width: 100%;
-      }
-
-      .infos-contact {
-        text-align: center;
+      .hero p {
+        font-size: 18px;
       }
 
       .btn-waze {
         width: 100%;
-        padding: 12px;
+        font-size: 16px;
+        padding: 14px;
       }
     }
   </style>
 </head>
 <body>
 
-  <section id="nous-trouver">
-    <div class="container">
-      <h3>Nous Trouver</h3>
-      <div class="carte-et-infos">
-        <iframe
-          class="map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.337334031129!2d2.352222715675049!3d48.85661407928768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671d8772eac45%3A0x40b82c3688c9460!2sParis!5e0!3m2!1sfr!2sfr!4v1710000000000"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-
-        <div class="infos-contact">
-          <h4>Le Green Bar</h4>
-          <p>📍 21 Avenue des Étoiles, 75000 Paris</p>
-          <p>📞 01 23 45 67 89</p>
-          <p>📧 contact@greenbar.fr</p>
-          <p>🕐 Ouvert de 17h à 1h, tous les jours</p>
-
-          <a class="btn-waze"
-             href="https://waze.com/ul?ll=48.856614,2.3522219&navigate=yes"
-             target="_blank"
-             rel="noopener noreferrer">
-             🚗 S'y rendre avec Waze
-          </a>
-        </div>
-      </div>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Nous Trouver</h1>
+      <p>📍 21 Avenue des Étoiles, 75000 Paris</p>
+      <a class="btn-waze" href="https://waze.com/ul?ll=48.856614,2.3522219&navigate=yes" target="_blank" rel="noopener noreferrer">
+        🚗 Ouvrir dans Waze
+      </a>
     </div>
   </section>
 

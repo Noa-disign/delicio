@@ -10,13 +10,13 @@
       box-sizing: border-box;
       margin: 0; padding: 0;
     }
-    body {
-      background: #0a0a0a;
-      color: #fff;
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-      padding: 60px 20px;
-    }
+body {
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'Inter', sans-serif; /* police similaire à index.html */
+  text-align: center;
+  padding: 160px 20px;
+}
     h1.menu-title {
       font-size: 36px;
       margin-bottom: 15px;
@@ -74,6 +74,89 @@
       box-shadow: 0 0 20px #00c700bb;
       transition: 0.3s ease;
     }
+
+  /* À placer dans ta balise <style> (hors media query) */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  z-index: 1000;
+}
+
+header h1 {
+  font-family:serif;
+  font-size: 42px;
+  flex-shrink: 0;
+  color: #fff;
+  margin: 0;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 37px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #e26dff;
+}
+
+.reservation-button {
+  padding: 15px 25px;
+  border: 2px solid white;
+  border-radius: 15px;
+  background: transparent;
+  color: white;
+  font-weight: 1000;
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+  transition: all 250ms ease;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.reservation-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #008b0cb7;
+  z-index: -1;
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms;
+}
+
+.reservation-button:hover::before {
+  width: 100%;
+}
 
     @media (max-width: 600px) {
   .menu-toggle {
@@ -173,6 +256,11 @@
     color: #000;
     outline: none;
   }
+  @media (max-width: 768px) {
+  header {
+    display: none !important;
+  }
+}
 }
 
 
@@ -196,14 +284,24 @@
   <span></span>
   <span></span>
 </div>
-<nav>
-  <ul>
-    <li><a href="menu.html">Menu</a></li>
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#reservations">Réservations</a></li>
-  </ul>
-</nav>
+<header>
+  <h1>Delicio</h1>
+  <div class="menu-toggle" id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="about.html">À propos</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="reservations.html">Réservations</a></li>
+      <li><a href="evenement.html">Evènement</a></li>
+    </ul>
+  </nav>
+  <a href="reservation.html" class="reservation-button">Réservations !</a>
+</header>
 <!-- ...existing code... -->
 
   <h1 class="menu-title">Notre Menu</h1>
