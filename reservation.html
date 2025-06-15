@@ -15,12 +15,10 @@
   
 
 body {
-  background: 
+  background:
     linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
-    url('blockk.png') center center / 100vw 100vh no-repeat fixed;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+    url('blockk.png') center center / cover no-repeat fixed;
+  background-color: #000; /* Pour remplir les bords en haut et bas */
   color: #000000;
   display: flex;
   flex-direction: column;
@@ -30,7 +28,6 @@ body {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
-
     h1 {
       font-size: 3rem;
       font-family: 'Playfair Display', serif;
