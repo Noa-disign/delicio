@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galerie - Le Green Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      padding: 100px 40px;
+    }
+
+    h2 {
+      font-size: 52px;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #fff;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #00c773;
+      margin: 20px auto 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+  h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  h2::after {
+    width: 50px;
+    height: 3px;
+    margin-top: 16px;
+  }
+}
+
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px; /* Plus d'air entre les images */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+    .gallery a {
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 255, 128, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+
+    .gallery img:hover {
+      transform: scale(1.025);
+      box-shadow: 0 12px 40px rgba(0, 255, 128, 0.15);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 100px;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      cursor: zoom-out;
+    }
+
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 255, 128, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img.landscape:hover {
+  transform: none;
+  box-shadow: 0 8px 30px rgba(0, 255, 128, 0.08); /* même ombre qu'au repos */
+}
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      z-index: 1000;
+    }
+    
+@media (max-width: 600px) {
+  header {
+    position: fixed !important;
+    top: 5px !important;
+    left: 10px !important;
+    right: 10px !important;
+    padding: 8px 15px !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 17px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    z-index: 1100 !important;
+    box-shadow: 0 1px 100px rgba(0, 0, 0, 0.308) !important;
+  }
+
+
+  body {
+    font-size: 4px !important;
+    line-height: 1.4 !important;
+  }
+}
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 34px !important;
+  }
+}
+
+
+
+    header {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  background: #000000;
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  flex-shrink: 0;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centre horizontalement le menu */
+  font-size: 19px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 37px;
+  margin: 0; /* au cas où */
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color:  #e26dff;
+}
+
+@media (max-width: 600px) {
+  nav {
+    position: fixed;
+    top: 60px; /* sous header */
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 20px 30px;
+    display: none; /* caché par défaut */
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    z-index: 210;
+    min-width: 240px;
+    max-width: 320px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform-origin: top right;
+    will-change: transform, opacity;
+  }
+
+  nav.active {
+    display: flex !important;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Animation douce d'apparition */
+  nav:not(.active) {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+  }
+
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background-color: #ffffff;
+    color: #000;
+    outline: none;
+  }
+
+/* Bouton hamburger épuré et premium */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 300;
+  background: transparent;
+  border: none;
+  padding: 0;
+  user-select: none;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7)); /* vert sombre avec transparence */
+  transition: filter 0.3s ease;
+}
+
+.menu-toggle:hover {
+  filter: drop-shadow(0 0 8px rgb(0, 207, 0)); /* vert saturé au hover */
+}
+
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: #00c700; /* vert forêt, élégant et premium */
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5); /* ombre verte douce */
+}
+
+
+  /* Animation du menu toggle quand actif (optionnel) */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+}
+
+
+    @media (max-width: 768px) {
+      body {
+        padding: 100px 20px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+
+
+        /* MOBILES (≤ 768px) */
+@media (max-width: 1024px) {
+  .hero-text {
+    font-size: 28px;
+  }
+
+  .hero-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .about-text p {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  #about h3,
+  #avis h3 {
+    font-size: 28px;
+  }
+
+  .testimonial {
+    padding: 25px 20px;
+    min-width: auto;
+  }
+
+  .testimonial p {
+    font-size: 1.1rem;
+  }
+
+  .bottom-logo {
+    font-size: 40px;
+    bottom: 20px;
+    left: 10px;
+  }
+
+  .hero-overlay {
+    top: 40px;
+    left: 20px;
+  }
+}
+
+/* Cacher le bouton classique sur mobile */
+@media (max-width: 1024px) {
+  .btn-reservation {
+    display: none;
+  }
+}
+
+/* Bouton flottant mobile */
+.floating-btn {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .floating-btn {
+    display: block;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #008f18;
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    z-index: 10000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .floating-btn:hover {
+    background-color: #005200;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Delicio</h1>
+    <div class="menu-toggle" id="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav>
+  <ul>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#reservations.html">Réservations</a></li>
+    <li><a href="#noustrouver.html">Nous trouver</a></li>
+    <li><a href="#galerie.html">En images</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+  </header>
+
+
+  <h2>Notre Galerie</h2>
+
+  <div class="gallery">
+    <a href="bloc2.png"><img src="bloc2.png" onerror="this.parentNode.style.display='none'"></a>
+    <a href="bloc3.png"><img src="bloc3.png" onerror="this.parentNode.style.display='none'"></a>
+    <a href="blockk.png"><img src="blockk.png" onerror="this.parentNode.style.display='none'"></a>
+    <a href="image4.jpg"><img src="image4.jpg" onerror="this.parentNode.style.display='none'"></a>
+    <a href="image5.jpg"><img src="image5.jpg" onerror="this.parentNode.style.display='none'"></a>
+    <a href="image6.jpg"><img src="image6.jpg" onerror="this.parentNode.style.display='none'"></a>
+  </div>
+
+  <div id="lightbox">
+    <img src="">
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Le Green Bar. Tous droits réservés.
+  </div>
+
+  <a href="reservation.html" class="floating-btn">Réserver</a>
+
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+
+    document.querySelectorAll(".gallery a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const imgSrc = link.getAttribute("href");
+        lightboxImg.src = imgSrc;
+        lightbox.style.display = "flex";
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+      lightboxImg.src = "";
+    });
+  </script>
+
+  <script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.querySelector('nav');
+
+  function toggleMenu() {
+    const isActive = nav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isActive);
+
+    if (isActive) {
+      const firstLink = nav.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      menuToggle.focus();
+    }
+  }
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  document.addEventListener('click', (e) => {
+    if (
+      nav.classList.contains('active') &&
+      !nav.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuToggle.focus();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('active')) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuToggle.focus();
+    }
+  });
+</script>
+
+  
+
+</body>
+</html>
+
+

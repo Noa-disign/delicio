@@ -118,6 +118,37 @@ body {
       animation: shake 0.4s ease;
     }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    padding: 100px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    transform: none;
+    text-align: center;
+  }
+
+  form {
+    padding: 40px;
+    max-width: 50%;
+    width: 100%; /* pour que max-width soit respecté */
+    transform: none;
+    margin: 0 auto; /* assure centrage */
+  }
+
+  input, button {
+    font-size: 1rem;
+    padding: 16px;
+  }
+}
+
+
 
 .reservation-button {
   padding: 15px 25px;
@@ -220,7 +251,7 @@ nav {
   flex: 1;
   display: flex;
   justify-content: center; /* centre horizontalement le menu */
-  font-size: 22px;
+  font-size: 19px;
 }
 
 nav ul {
@@ -383,6 +414,8 @@ nav a:hover {
         text-align: center;
       }
     }
+
+
   </style>
 </head>
 <body>
@@ -414,6 +447,10 @@ nav a:hover {
     <button type="submit">Réserver</button>
   </form>
   <div id="message"></div>
+
+
+
+  
 
   <script type="module">
     import { Client, Databases } from "https://cdn.jsdelivr.net/npm/appwrite@13.0.0/+esm";
