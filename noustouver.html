@@ -12,158 +12,384 @@
       box-sizing: border-box;
     }
 
-    body, html {
-      height: 100%;
-      font-family: 'Playfair Display', serif;
-      color: #fff;
+    body {
       background-color: #0a0a0a;
-    }
-
-    .hero {
-      background: url('bloc2.png') center center / cover no-repeat;
-      height: 100vh;
-      position: relative;
+      font-family: 'Playfair Display', serif;
+      color: #f1f1f1;
+      padding: 80px 20px;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 40px;
+      min-height: 100vh;
     }
 
-@keyframes zoomBackground {
-  0% {
-    background-size: 100%;
-  }
-  100% {
-    background-size: 105%;
-  }
-}
+    .container {
+      max-width: 1000px;
+      background: #111;
+      border-radius: 24px;
+      padding: 60px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(0, 255, 128, 0.08);
+    }
 
-.btn-waze {
-  position: relative;
-  display: inline-block;
-  background: rgba(0, 199, 0, 0.1);
-  color: #ffffff;
-  font-weight: bold;
-  padding: 18px 48px;
-  font-size: 20px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 255, 0, 0.3);
+    .image-box {
+      flex: 1 1 300px;
+      max-width: 400px;
+      margin: 0 30px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,255,128,0.05);
+      height: 250px;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 16px;
+      display: block;
+    }
+
+    .text-content {
+      flex: 1 1 300px;
+      max-width: 400px;
+      margin: 0 30px;
+      text-align: left;
+    }
+
+    .text-content h1 {
+      font-size: 42px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .text-content p {
+      font-size: 18px;
+      color: #cccccc;
+      margin-bottom: 30px;
+    }
+
+    .btn-waze {
+      display: inline-block;
+      padding: 14px 36px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #ffffff;
+      border: 1px solid rgba(0, 255, 128, 0.2);
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 255, 128, 0.05);
+      text-decoration: none;
+      transition: all 0.4s ease;
+    }
+
+    .btn-waze:hover {
+      background: rgba(0, 255, 128, 0.1);
+      color: #00ff88;
+      border-color: rgba(0, 255, 128, 0.3);
+      transform: scale(1.03);
+    }
+
+      /* À placer dans ta balise <style> (hors media query) */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(15, 15, 15, 0.7);
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 25px rgba(0, 199, 0, 0.2), inset 0 0 10px rgba(0, 199, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  z-index: 1000;
+}
+
+header h1 {
+  font-family:serif;
+  font-size: 38px;
+  flex-shrink: 0;
+  color: #fff;
+  margin: 0;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 37px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
   text-decoration: none;
-  overflow: hidden;
-  transition: all 0.4s ease;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
 }
 
-.btn-waze::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(0, 199, 0, 0.2) 10%, transparent 80%);
-  animation: pulse-glow 4s infinite;
-  z-index: 0;
+nav a:hover {
+  color: #e26dff;
 }
 
-.btn-waze span {
+.reservation-button {
+  padding: 15px 25px;
+  border: 2px solid white;
+  border-radius: 15px;
+  background: transparent;
+  color: white;
+  font-weight: 1000;
+  font-size: 16px;
   position: relative;
   z-index: 1;
+  transition: all 250ms ease;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  display: inline-block;
 }
 
-.btn-waze:hover {
-  color: #000;
-  background-color: #00c700;
-  transform: scale(1.08);
-  box-shadow: 0 0 40px #00ff7b, inset 0 0 10px #006b2b;
+.reservation-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-color: #008b0cb7;
+  z-index: -1;
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  transition: all 250ms;
 }
 
-@keyframes pulse-glow {
-  0% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.4;
-  }
-  50% {
-    transform: rotate(180deg) scale(1.1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-    opacity: 0.4;
-  }
+.reservation-button:hover::before {
+  width: 100%;
 }
 
+    @media (max-width: 600px) {
+  .menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 300;
+    background: transparent;
+    border: none;
+    padding: 0;
+    user-select: none;
+    filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7));
+    transition: filter 0.3s ease;
+  }
+  .menu-toggle:hover {
+    filter: drop-shadow(0 0 8px rgb(0, 207, 0));
+  }
+  .menu-toggle span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: #00c700;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5);
+  }
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+  nav {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 20px 30px;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    z-index: 210;
+    min-width: 240px;
+    max-width: 320px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform-origin: top right;
+    will-change: transform, opacity;
+  }
+  nav.active {
+    display: flex !important;
+    opacity: 1;
+    transform: scale(1);
+  }
+  nav:not(.active) {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+  }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background-color: #ffffff;
+    color: #000;
+    outline: none;
+  }
+  @media (max-width: 768px) {
+  header {
+    display: none !important;
+  }
+}
+}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.295);
-      z-index: 1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-    }
-
-    .hero h1 {
-      font-size: 64px;
-      margin-bottom: 20px;
-      color: #fff;
-      text-shadow: 0 4px 10px rgba(0, 199, 0, 0.5);
-    }
-
-    .hero p {
-      font-size: 22px;
-      margin-bottom: 40px;
-      color: #ccc;
-    }
-
-
-    .footer {
-      background: #0a0a0a;
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 14px;
-      color: #aaa;
-    }
 
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 40px;
+      .container {
+        flex-direction: column;
+        padding: 40px 20px;
       }
 
-      .hero p {
-        font-size: 18px;
+      .image-box, .text-content {
+        margin: 20px 0;
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .text-content h1 {
+        font-size: 32px;
+      }
+
+      .text-content p {
+        font-size: 16px;
       }
 
       .btn-waze {
         width: 100%;
-        font-size: 16px;
         padding: 14px;
       }
     }
+
+    
   </style>
 </head>
 <body>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Nous Trouver</h1>
+  <!-- ...existing code... -->
+<div class="menu-toggle" id="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav>
+  <ul>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#reservations">Réservations</a></li>
+  </ul>
+</nav>
+<!-- ...existing code... -->
+
+
+<script>
+    const img = document.getElementById('menuImage');
+    const lightbox = document.getElementById('lightbox');
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+    img.addEventListener('click', () => lightbox.classList.add('active'));
+  </script>
+  <script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.querySelector('nav');
+
+  function toggleMenu() {
+    const isActive = nav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', isActive);
+
+    if (isActive) {
+      const firstLink = nav.querySelector('a');
+      if (firstLink) firstLink.focus();
+    } else {
+      menuToggle.focus();
+    }
+  }
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  document.addEventListener('click', (e) => {
+    if (
+      nav.classList.contains('active') &&
+      !nav.contains(e.target) &&
+      !menuToggle.contains(e.target)
+    ) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuToggle.focus();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('active')) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+      menuToggle.focus();
+    }
+  });
+</script>
+
+  <div class="container">
+    <div class="image-box">
+      <img src="bloc2.png" alt="Devanture Le Green Bar">
+    </div>
+    <div class="text-content">
+      <h1>Le Green Bar</h1>
       <p>📍 21 Avenue des Étoiles, 75000 Paris</p>
       <a class="btn-waze" href="https://waze.com/ul?ll=48.856614,2.3522219&navigate=yes" target="_blank" rel="noopener noreferrer">
         🚗 Ouvrir dans Waze
       </a>
     </div>
-  </section>
-
-  <div class="footer">
-    &copy; 2025 Le Green Bar. Tous droits réservés.
   </div>
 
 </body>

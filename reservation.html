@@ -24,7 +24,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px;
+  padding: 100px 20px;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
@@ -32,9 +32,8 @@ body {
       font-size: 3rem;
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      color: #baff9c;
+      color: #ffffff;
       letter-spacing: 1.5px;
-      margin-bottom: 50px;
       text-shadow: 2px 2px 10px rgba(144, 255, 167, 0.3);
       transform: rotateY(-10deg);
     }
@@ -118,52 +117,7 @@ body {
     form.error {
       animation: shake 0.4s ease;
     }
-    /* À placer dans ta balise <style> (hors media query) */
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  background: rgba(15, 15, 15, 0.7);
-  backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  z-index: 1000;
-}
 
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  flex-shrink: 0;
-  color: #fff;
-  margin: 0;
-}
-
-nav {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  font-size: 22px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 37px;
-  margin: 0;
-  padding: 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #e26dff;
-}
 
 .reservation-button {
   padding: 15px 25px;
@@ -201,63 +155,108 @@ nav a:hover {
   width: 100%;
 }
 
-    @media (max-width: 600px) {
-  .menu-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 36px;
-    height: 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    z-index: 300;
-    background: transparent;
-    border: none;
-    padding: 0;
-    user-select: none;
-    filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7));
-    transition: filter 0.3s ease;
+
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      z-index: 1000;
+    }
+    
+@media (max-width: 600px) {
+  header {
+    position: fixed !important;
+    top: 5px !important;
+    left: 10px !important;
+    right: 10px !important;
+    padding: 8px 15px !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 17px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    z-index: 1100 !important;
+    box-shadow: 0 1px 100px rgba(0, 0, 0, 0.308) !important;
   }
-  .menu-toggle:hover {
-    filter: drop-shadow(0 0 8px rgb(0, 207, 0));
+
+
+  body {
+    font-size: 4px !important;
+    line-height: 1.4 !important;
   }
-  .menu-toggle span {
-    display: block;
-    height: 4px;
-    width: 100%;
-    background-color: #00c700;
-    border-radius: 3px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5);
+}
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 34px !important;
   }
-  .menu-toggle.active span:nth-child(1) {
-    transform: translateY(12px) rotate(45deg);
-    background-color: #fff;
-    box-shadow: 0 2px 12px #fff;
-  }
-  .menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .menu-toggle.active span:nth-child(3) {
-    transform: translateY(-12px) rotate(-45deg);
-    background-color: #fff;
-    box-shadow: 0 2px 12px #fff;
-  }
+}
+
+
+    header {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  background: #000000;
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  flex-shrink: 0;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centre horizontalement le menu */
+  font-size: 22px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 37px;
+  margin: 0; /* au cas où */
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color:  #e26dff;
+}
+
+@media (max-width: 600px) {
   nav {
     position: fixed;
-    top: 60px;
+    top: 60px; /* sous header */
     right: 20px;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(12px);
     border-radius: 12px;
     padding: 20px 30px;
-    display: none;
+    display: none; /* caché par défaut */
     flex-direction: column;
     gap: 20px;
     font-size: 20px;
     font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     z-index: 210;
@@ -267,16 +266,20 @@ nav a:hover {
     transform-origin: top right;
     will-change: transform, opacity;
   }
+
   nav.active {
     display: flex !important;
     opacity: 1;
     transform: scale(1);
   }
+
+  /* Animation douce d'apparition */
   nav:not(.active) {
     opacity: 0;
     transform: scale(0.95);
     pointer-events: none;
   }
+
   nav ul {
     display: flex;
     flex-direction: column;
@@ -285,6 +288,7 @@ nav a:hover {
     margin: 0;
     list-style: none;
   }
+
   nav ul li a {
     color: #fff;
     text-decoration: none;
@@ -293,19 +297,66 @@ nav a:hover {
     transition: background-color 0.3s ease, color 0.3s ease;
     font-size: 18px;
   }
+
   nav ul li a:hover,
   nav ul li a:focus {
     background-color: #ffffff;
     color: #000;
     outline: none;
   }
-  @media (max-width: 768px) {
-  header {
-    display: none !important;
-  }
-}
+
+/* Bouton hamburger épuré et premium */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 300;
+  background: transparent;
+  border: none;
+  padding: 0;
+  user-select: none;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7)); /* vert sombre avec transparence */
+  transition: filter 0.3s ease;
 }
 
+.menu-toggle:hover {
+  filter: drop-shadow(0 0 8px rgb(0, 207, 0)); /* vert saturé au hover */
+}
+
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: #00c700; /* vert forêt, élégant et premium */
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5); /* ombre verte douce */
+}
+
+
+  /* Animation du menu toggle quand actif (optionnel) */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+}
     @keyframes shake {
       0% { transform: translateX(0); }
       25% { transform: translateX(-6px); }
@@ -336,24 +387,23 @@ nav a:hover {
 </head>
 <body>
 
-<header>
-  <h1>Delicio</h1>
-  <div class="menu-toggle" id="menu-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="about.html">À propos</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="reservations.html">Réservations</a></li>
-      <li><a href="evenement.html">Evènement</a></li>
-    </ul>
-  </nav>
-  <a href="reservation.html" class="reservation-button">Réservations !</a>
-</header>
+  <header>
+    <h1>Delicio</h1>
+    <div class="menu-toggle" id="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav>
+  <ul>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#reservations">Réservations</a></li>
+  </ul>
+</nav>
+
+  </header>
 <!-- ...existing code... -->
   <h1>Réserve ta table</h1>
   <form id="reservationForm">
