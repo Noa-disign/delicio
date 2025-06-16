@@ -13,13 +13,34 @@
     }
 
     body {
-      background-color: #000;
-      color: #fff;
       font-family: 'Inter', sans-serif;
+      color: #fff;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1920&q=80'); /* remplace par ton image */
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7); /* couche foncée */
+      z-index: -1;
     }
 
     h1 {
@@ -28,6 +49,7 @@
       margin-bottom: 40px;
       text-align: center;
       letter-spacing: 1px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
     .event-list {
@@ -44,6 +66,7 @@
       border-radius: 12px;
       padding: 25px 30px;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
 
     .event-card:hover {
@@ -78,7 +101,7 @@
 </head>
 <body>
 
-  <h1>📺 Matchs diffusés prochainement</h1>
+  <h1>📺 Diffusions</h1>
 
   <div class="event-list" id="events">
     <!-- Exemple d’événements -->
@@ -92,9 +115,6 @@
       <div class="event-date">Samedi 22 juin — 21h00</div>
     </div>
   </div>
-
-  <!-- Si aucun événement -->
-  <!-- <div class="no-events">Aucun match prévu pour le moment.</div> -->
 
 </body>
 </html>
