@@ -64,7 +64,7 @@
 }
 
 header h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'inter', serif;
   font-size: 42px;
   flex-shrink: 0;
 }
@@ -290,28 +290,27 @@ nav a:hover {
     box-sizing: border-box;
   }
 
- .left-img {
-  position: relative; /* déjà présent, nécessaire */
-  /* tes autres styles */
-  width: 110%;
-  height: 100%;
-  aspect-ratio: unset;
-  border-radius: 20px;
-  margin-left: -10px;
-  margin-top: 5px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(155, 155, 155, 0.253);
-}
+  .left-img {
+    position: relative; /* déjà présent, nécessaire */
+    width: 110%;
+    height: 100%;
+    aspect-ratio: unset;
+    border-radius: 20px;
+    margin-left: -10px;
+    margin-top: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(155, 155, 155, 0.253);
+  }
 
-/* Overlay sombre */
-.left-img::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1; /* en dessous du texte qui est en z-index: 2 */
-  pointer-events: none; /* pour ne pas bloquer les clics */
-}
-
+  /* Overlay sombre */
+  .left-img::before {
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.267);
+    inset: 0;
+    z-index: 1; /* en dessous du texte qui est en z-index: 2 */
+    pointer-events: none; /* pour ne pas bloquer les clics */
+  }
 
   .right-stack {
     display: none;
@@ -323,8 +322,27 @@ nav a:hover {
     object-fit: cover;
   }
 
+  /* Ajout du style pour le texte avec fondu */
+  .left-img .img-text-sub {
+    opacity: 0;
+    animation: fadeIn 1s forwards ease-in 0.6s;
+    position: absolute;
+    top: calc(20% + 65px);
+    left: 50%;
+    transform-style: preserve-3d;
+    transform: translateX(-50%) rotateY(-20deg);
 
+    font-size: 39px;
+    font-family: 'inter', serif;
+    font-weight: 700;
+    color: #ffffff;
 
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+    z-index: 2;  /* au-dessus de l’overlay */
+    text-align: center;
+  }
+}
 
 
 
@@ -334,68 +352,23 @@ nav a:hover {
   position: relative; /* nécessaire pour les enfants en absolute */
   overflow: hidden; /* pour bien gérer le flou */
 }
-.left-img .img-text-main {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform-style: preserve-3d;
-  width: 150vw;  /* pour dépasser sur les côtés */
-  transform: translateX(-50%) rotateY(-20deg);
 
-  font-size: 50px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 900;
-  color: #c0ffc2; /* vert vif */
-
-  /* Effet 3D épais avec plusieurs couches d'ombre pour simuler une extrusion */
-  text-shadow:
-    1px 1px 0 #3a5f33,
-    2px 2px 0 #2e4a27,
-    3px 3px 0 #22351a,
-    4px 4px 0 #18220e,
-    5px 5px 10px rgba(0, 0, 0, 0.8);
-
-  letter-spacing: 3px;
-  white-space: nowrap;
-  z-index: 10;
-  text-align: center;
-
-  /* Animation fade-in avec légère translation verticale */
-  opacity: 0;
-  animation: fadeSlideDown 1s forwards ease-out 0.3s;
-}
-
-/* Animation */
-@keyframes fadeSlideDown {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-30px) rotateY(-20deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) rotateY(-20deg);
-  }
-
-}
 
 .left-img .img-text-sub {
   position: absolute;
-  top: calc(25% + 65px);
+  top: calc(10% + 65px);
   left: 50%;
   transform-style: preserve-3d;
   transform: translateX(-50%) rotateY(-20deg);
+  text-shadow: 0 0 13px rgb(0, 0, 0);
 
-  font-size: 26px;
-  font-family: 'Montserrat', sans-serif;
+
+  font-size: 39px;
+  font-family: 'inter', serif;
   font-weight: 700;
-  color: #c0ffc2;
+  color: #ffffff;
 
-  text-shadow:
-    1px 1px 0 #3a5f33,
-    2px 2px 0 #2e4a27,
-    3px 3px 0 #22351a,
-    4px 4px 0 #18220e,
-    5px 5px 10px rgba(0, 0, 0, 0.8);
+
 
   letter-spacing: 1.2px;
   white-space: nowrap;
@@ -1278,14 +1251,79 @@ nav a:hover {
   }
 }
 
-    
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Masqué par défaut */
+.image-button {
+  display: none;
+}
+
+/* Bouton centré uniquement sur mobile */
+@media screen and (max-width: 768px) {
+  .image-button {
+    display: inline-block;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.6em 1.2em;
+    border: 3.5px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 0.6em;
+    cursor: pointer;
+    z-index: 10;
+    white-space: nowrap;
+
+
+    opacity: 0;
+    animation: fadeIn 1s forwards ease-in;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  .image-button:hover {
+    transform: translate(-50%, -50%) scale(1.15) rotate(8deg);
+    background-color: #1f9900;
+    color: #fff;
+  }
+}
+
+
+  @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
 
 
   </style>
 </head>
 <body>
   <header>
-    <h1>Delicio</h1>
+    <h1>[block]</h1>
     <div class="menu-toggle" id="menu-toggle">
   <span></span>
   <span></span>
@@ -1310,9 +1348,8 @@ nav a:hover {
 <div class="interactive-gallery">
   <div class="img-button left-img">
     <img src="blockk.png" alt="Projet" style="width:100%; height:100%; object-fit: cover;">
-
-    <div class="img-text-main">le [block]</div>
-    <div class="img-text-sub">Bar, resto et sport</div>
+    <a href="#" class="image-button">Réserver une table</a>
+    <div class="img-text-sub">Bienvenue<br>au [Block]👋​</div>
     <button class="cta-btn2">Voir plus</button>
   </div>
 </div>
