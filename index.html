@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delicio - Restaurant Haut de Gamme</title>
+  <title>[block] - Restaurant Haut de Gamme</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -92,7 +92,7 @@ nav a {
 }
 
 nav a:hover {
-  color:  #e26dff;
+  color:  #009c08;
 }
 
 @media (max-width: 600px) {
@@ -306,7 +306,7 @@ nav a:hover {
   .left-img::before {
     content: "";
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.267);
+    background-color: rgba(0, 0, 0, 0.37);
     inset: 0;
     z-index: 1; /* en dessous du texte qui est en z-index: 2 */
     pointer-events: none; /* pour ne pas bloquer les clics */
@@ -333,7 +333,7 @@ nav a:hover {
     transform: translateX(-50%) rotateY(-20deg);
 
     font-size: 39px;
-    font-family: 'inter', serif;
+    font-family: 'Contrail one', serif;
     font-weight: 700;
     color: #ffffff;
 
@@ -350,35 +350,72 @@ nav a:hover {
 
 .left-img {
   position: relative; /* nécessaire pour les enfants en absolute */
-  overflow: hidden; /* pour bien gérer le flou */
+  overflow: hidden;   /* pour bien gérer les animations */
+}
+
+@media (max-width: 768px) {
+  .wave-text {
+    position: absolute;
+    top: calc(13% + 65px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Poppins', sans-serif;
+    font-size: 62px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -7px; /* lettres très serrées */
+    line-height: 0.8;     /* lignes rapprochées */
+    white-space: nowrap;
+    text-align: center;
+    z-index: 10;
+    display: flex;
+    gap: 0;
+    opacity: 0;
+    animation: fadeSlideUp 1s forwards ease-out 0.6s;
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.7),
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      0 3px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .wave-text span {
+    display: inline-block;
+    animation: waveMove 1.6s infinite ease-in-out;
+  }
+
+  .wave-text span:nth-child(1) { animation-delay: 0s; }
+  .wave-text span:nth-child(2) { animation-delay: 0.1s; }
+  .wave-text span:nth-child(3) { animation-delay: 0.2s; }
+  .wave-text span:nth-child(4) { animation-delay: 0.3s; }
+  .wave-text span:nth-child(5) { animation-delay: 0.4s; }
+  .wave-text span:nth-child(6) { animation-delay: 0.5s; }
+  .wave-text span:nth-child(7) { animation-delay: 0.6s; }
+  .wave-text span:nth-child(8) { animation-delay: 0.7s; }
+  .wave-text span:nth-child(9) { animation-delay: 0.8s; }
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+  }
+}
+
+@keyframes waveMove {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 
-.left-img .img-text-sub {
-  position: absolute;
-  top: calc(10% + 65px);
-  left: 50%;
-  transform-style: preserve-3d;
-  transform: translateX(-50%) rotateY(-20deg);
-  text-shadow: 0 0 13px rgb(0, 0, 0);
 
-
-  font-size: 39px;
-  font-family: 'inter', serif;
-  font-weight: 700;
-  color: #ffffff;
-
-
-
-  letter-spacing: 1.2px;
-  white-space: nowrap;
-  z-index: 10;
-  text-align: center;
-
-  /* Animation fade-in coordonnée avec le titre */
-  opacity: 0;
-  animation: fadeSlideUp 1s forwards ease-out 0.6s;
-}
 
 @keyframes fadeSlideUp {
   0% {
@@ -393,13 +430,6 @@ nav a:hover {
 
 
 
-  .left-img:hover,
-  .left-img img:hover {
-    transform: none !important;
-    scale: none !important;
-    transition: none !important;
-    box-shadow: none !important;
-  }
 
   .left-img .cta-btn {
     position: relative;
@@ -411,7 +441,7 @@ nav a:hover {
     color: black;
     border: none;
     border-radius: 9999px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(236, 236, 236, 0.2);
     z-index: 2;
     font-size: 16px;
     cursor: pointer;
@@ -445,7 +475,6 @@ nav a:hover {
   background: rgba(255, 0, 0, 0.8);
 }
 
-}
 
 
 
@@ -759,46 +788,43 @@ nav a:hover {
 
 
 .reservation-button {
-  padding: 15px 25px;
-  border: 2px solid white;
-  border-radius: 15px;
-  background: transparent;
-  color: white;
-  font-weight: 1000;
-  font-size: 16px;
-  position: relative;
-  z-index: 1;
-  transition: all 250ms ease;
+  padding: 17px 40px;
+  border-radius: 50px;
   cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
   text-decoration: none;
   display: inline-block;
+  font-weight: bold;
+  color: black;
 }
 
-.reservation-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  border-radius: 15px;
-  background-color: #008b0cb7;
-  z-index: -1;
-  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-  transition: all 250ms;
+.reservation-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(130, 82%, 33%);
+  color: white;
+  box-shadow: rgb(0, 116, 10) 0px 7px 29px 0px;
 }
 
+.reservation-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(128, 84%, 37%);
+  color: white;
+  box-shadow: rgb(41, 112, 0) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+/* Responsive : cache le bouton sur mobile */
 @media screen and (max-width: 768px) {
   .reservation-button {
     display: none;
   }
-}
-
-
-.reservation-button:hover::before {
-  width: 100%;
 }
 
 
@@ -808,7 +834,7 @@ nav a:hover {
   position: fixed;
   bottom: 70px;
   left: 80px;
-  font-family: 'Playfair Display', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 92px;
   font-weight: 600;
   color: white;
@@ -1340,7 +1366,7 @@ nav a:hover {
   </ul>
 </nav>
 <!-- From Uiverse.io by alexroumi --> 
-<a href="reservation.html" class="reservation-button">Réservations !</a>
+<a href="reservation.html" class="reservation-button">Réserver</a>
 </button>
   </header>
 
@@ -1349,7 +1375,11 @@ nav a:hover {
   <div class="img-button left-img">
     <img src="blockk.png" alt="Projet" style="width:100%; height:100%; object-fit: cover;">
     <a href="#" class="image-button">Réserver une table</a>
-    <div class="img-text-sub">Bienvenue<br>au [Block]👋​</div>
+<div class="wave-text">
+  <span>B</span><span>O</span><span>N</span><span>J</span><span>O</span><span>U</span><span>R</span>
+</div>
+
+
     <button class="cta-btn2">Voir plus</button>
   </div>
 </div>
@@ -1426,7 +1456,7 @@ nav a:hover {
   <div class="about">
     <div class="about-text">
       <p>
-        Chez <strong>Delicio</strong>, chaque plat est une œuvre d’art. Notre cuisine marie tradition et modernité, dans un cadre raffiné où chaque détail compte.
+        Chez <strong>[block]</strong>, chaque plat est une œuvre d’art. Notre cuisine marie tradition et modernité, dans un cadre raffiné où chaque détail compte.
       </p>
     </div>
     <div class="about-image">
@@ -1507,7 +1537,7 @@ nav a:hover {
 
 
 
-  <div class="bottom-logo">Delicio</div>
+  <div class="bottom-logo">[block]</div>
 
 
 
@@ -1611,7 +1641,7 @@ nav a:hover {
 
 
   <footer class="footer">
-    &copy; 2025 Delicio. Tous droits réservés.
+    &copy; 2025 [block]. Tous droits réservés.
   </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.1"></script>
