@@ -589,62 +589,72 @@ nav a:hover {
     updateTimeOptions();
   });
 
-  // Gestion de la soumission du formulaire
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
-    const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
+  const phone = form.phone.value;
+  const phoneRegex = /^0[1-9][0-9]{8}$/;
+  if (!phoneRegex.test(phone)) {
+    message.innerText = "❌ Le numéro de téléphone doit comporter 10 chiffres et commencer par 0.";
+    return;
+  }
 
-    // Vérifie s’il reste des tables pour le créneau choisi
-    try {
-      const existing = await databases.listDocuments(databaseId, collectionId, [
-        Query.equal("date", formattedDate),
-        Query.equal("time", form.time.value)
-      ]);
+  const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
+  const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
 
-      if (existing.documents.length >= TOTAL_TABLES) {
-        message.innerText = "❌ Ce créneau est complet. Merci d’en choisir un autre.";
-        return;
-      }
-    } catch (error) {
-      console.warn("⚠️ Erreur Appwrite check :", error);
-      message.innerText = "❌ Problème de connexion, veuillez réessayer.";
+  // Vérifie s’il reste des tables pour le créneau choisi
+  try {
+    const existing = await databases.listDocuments(databaseId, collectionId, [
+      Query.equal("date", formattedDate),
+      Query.equal("time", form.time.value)
+    ]);
+
+    if (existing.documents.length >= TOTAL_TABLES) {
+      message.innerText = "❌ Ce créneau est complet. Merci d’en choisir un autre.";
       return;
     }
+  } catch (error) {
+    console.warn("⚠️ Erreur Appwrite check :", error);
+    message.innerText = "❌ Problème de connexion, veuillez réessayer.";
+    return;
+  }
 
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      phone: form.phone.value,
-      date: formattedDate,
-      time: form.time.value
-    };
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    date: formattedDate,
+    time: form.time.value
+  };
 
-    try {
-      await databases.createDocument(databaseId, collectionId, 'unique()', data);
-      console.log("✅ Document créé dans Appwrite");
+  try {
+    await databases.createDocument(databaseId, collectionId, 'unique()', data);
+    console.log("✅ Document créé dans Appwrite");
 
-      // Envoi vers Zapier (non bloquant)
-      fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(() => console.log("✅ Données envoyées à Zapier"))
-      .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
+    // Envoi vers Zapier (non bloquant)
+    fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(() => console.log("✅ Données envoyées à Zapier"))
+    .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
 
-      message.innerText = "✅ Réservation confirmée. Merci !";
-      form.reset();
-      updateTimeOptions();
+    // Affiche le message de succès
+    message.innerText = "✅ Réservation confirmée. Merci !";
+    form.reset();
 
-    } catch (error) {
-      console.error("❌ Erreur Appwrite :", error);
-      message.innerText = "❌ Erreur lors de la réservation.";
-      form.classList.add('error');
-      setTimeout(() => form.classList.remove('error'), 400);
-    }
-  });
+    // Met à jour les créneaux disponibles
+    await updateTimeOptions();
+
+  } catch (error) {
+    console.error("❌ Erreur Appwrite :", error);
+    message.innerText = "❌ Erreur lors de la réservation.";
+    form.classList.add('error');
+    setTimeout(() => form.classList.remove('error'), 400);
+  }
+});
+
 </script>
 
 <script>
