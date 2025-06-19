@@ -533,23 +533,38 @@ nav a:hover {
 
     // Check si la date est complètement réservée (toutes les tables sur tous les horaires)
     try {
-      const dayReservations = await databases.listDocuments(databaseId, collectionId, [
-        Query.startsWith("date", date)
-      ]);
-      if (dayReservations.documents.length >= TOTAL_TABLES * timeSelect.options.length) {
-        message.innerText = "❌ Cette date est complète. Merci d’en choisir une autre.";
-        // Désactiver toutes les options horaires
-        for (const option of timeSelect.options) {
-          option.disabled = true;
-          option.textContent = `${option.value} (Complet)`;
-        }
-        return;
-      } else {
-        message.textContent = '';
-      }
-    } catch (err) {
-      console.warn("⚠️ Erreur vérif date complète :", err);
-    }
+  await databases.createDocument(databaseId, collectionId, 'unique()', data);
+  console.log("✅ Document créé dans Appwrite");
+
+  // Envoi vers Zapier (non bloquant)
+  fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(() => console.log("✅ Données envoyées à Zapier"))
+  .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
+
+  // ✅ Affiche le message de confirmation et garde-le
+  message.innerText = "✅ Réservation confirmée. Merci !";
+  message.classList.remove("error");
+  message.classList.add("success");
+
+  // ✅ Vide les champs du formulaire
+  form.reset();
+
+  // ✅ Met à jour les créneaux horaires
+  updateTimeOptions();
+
+} catch (error) {
+  console.error("❌ Erreur Appwrite :", error);
+  message.innerText = "❌ Erreur lors de la réservation.";
+  message.classList.remove("success");
+  message.classList.add("error");
+  form.classList.add("error");
+  setTimeout(() => form.classList.remove("error"), 400);
+}
+
 
     // Mise à jour individuelle des options horaires
     for (const option of timeSelect.options) {
