@@ -634,8 +634,6 @@ nav a:hover {
       .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
 
       message.innerText = "✅ Réservation confirmée. Merci !";
-      form.reset();
-      updateTimeOptions();
 
     } catch (error) {
       console.error("❌ Erreur Appwrite :", error);
