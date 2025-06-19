@@ -118,6 +118,43 @@ body {
       animation: shake 0.4s ease;
     }
 
+    select {
+  width: 100%;
+  padding: 18px 40px 18px 18px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: #d0ffd8;
+  background-color: #1a1a1a;
+  border: none;
+  border-bottom: 2px solid #2e4a27;
+  border-radius: 14px;
+  box-shadow: inset 0 0 5px rgba(91, 255, 140, 0.15);
+  appearance: none;
+  background-image:
+    url('data:image/svg+xml;utf8,<svg fill="lightgreen" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>'),
+    linear-gradient(to bottom, #1a1a1a, #1a1a1a);
+  background-repeat: no-repeat, repeat;
+  background-position: right 12px center, 0 0;
+  background-size: 20px 20px, 100%;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  outline: none;
+  border-bottom: 2px solid #a4ffba;
+}
+
+select option {
+  background-color: #0f0f0f;
+  color: #d0ffd8;
+}
+
+select:invalid {
+  color: #aaa;
+}
+
+
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
     padding: 100px 30px;
@@ -415,6 +452,7 @@ nav a:hover {
       }
     }
 
+    
 
   </style>
 </head>
@@ -444,12 +482,21 @@ nav a:hover {
 <form id="reservationForm">
   <input type="text" id="name" name="name" placeholder="Ton nom" required />
   <input type="email" id="email" name="email" placeholder="Ton email" required />
-  <input type="date" id="date" name="date" required />
+  <input
+  type="tel"
+  id="phone"
+  name="phone"
+  placeholder="Ton numéro de téléphone"
+  pattern="^0[1-9][0-9]{8}$"
+  title="Ton numéro de téléphone"
+  maxlength="10"
+  required
+/>
+
+  <input type="date" id="date" name="date" placeholder="Une date" required />
   <select id="time" name="time" required>
-    <option value="18:00">18:00</option>
     <option value="19:00">19:00</option>
-    <option value="20:00">20:00</option>
-    <option value="21:00">21:00</option>
+    <option value="21:30">21:00</option>
   </select>
 
   <button type="submit">Réserver</button>
@@ -639,6 +686,14 @@ nav a:hover {
       menuToggle.focus();
     }
   });
+
+  const phoneInput = document.getElementById('phone');
+
+phoneInput.addEventListener('input', () => {
+  // Supprime tout ce qui n'est pas un chiffre
+  phoneInput.value = phoneInput.value.replace(/\D/g, '');
+});
+
 </script>
 
 
