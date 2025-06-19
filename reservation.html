@@ -589,15 +589,9 @@ nav a:hover {
     updateTimeOptions();
   });
 
+  // Gestion de la soumission du formulaire
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-
-  const phone = form.phone.value;
-  const phoneRegex = /^0[1-9][0-9]{8}$/;
-  if (!phoneRegex.test(phone)) {
-    message.innerText = "❌ Le numéro de téléphone doit comporter 10 chiffres et commencer par 0.";
-    return;
-  }
 
   const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
   const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
@@ -640,11 +634,12 @@ form.addEventListener('submit', async (e) => {
     .then(() => console.log("✅ Données envoyées à Zapier"))
     .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
 
-    // Affiche le message de succès
+    // Affichage du message de confirmation
     message.innerText = "✅ Réservation confirmée. Merci !";
+
     form.reset();
 
-    // Met à jour les créneaux disponibles
+    // Attendre la mise à jour des créneaux
     await updateTimeOptions();
 
   } catch (error) {
