@@ -452,7 +452,39 @@ nav a:hover {
       }
     }
 
-    
+    #message {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  min-height: 1.5em; /* pour éviter un saut quand message vide */
+  transition: opacity 0.4s ease;
+  opacity: 1;
+}
+
+#message.error {
+  color: #e74c3c; /* rouge vif */
+}
+
+#message.success {
+  color: #27ae60; /* vert */
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}
+
 
   </style>
 </head>
@@ -532,86 +564,43 @@ nav a:hover {
     }
 
     // Check si la date est complètement réservée (toutes les tables sur tous les horaires)
-    try {
-      const dayReservations = await databases.listDocuments(databaseId, collectionId, [
-        Query.startsWith("date", date)
-      ]);
-      if (dayReservations.documents.length >= TOTAL_TABLES * timeSelect.options.length) {
-        message.innerText = "❌ Cette date est complète. Merci d’en choisir une autre.";
-        // Désactiver toutes les options horaires
-        for (const option of timeSelect.options) {
-          option.disabled = true;
-          option.textContent = `${option.value} (Complet)`;
-        }
-        return;
-      } else {
-        message.textContent = '';
-      }
-    } catch (err) {
-      console.warn("⚠️ Erreur vérif date complète :", err);
-    }
+   try {
+  await databases.createDocument(databaseId, collectionId, 'unique()', data);
+  console.log("✅ Document créé dans Appwrite");
 
-    // Mise à jour individuelle des options horaires
-    for (const option of timeSelect.options) {
-      const hour = option.value;
-      const fullDate = new Date(`${date}T${hour}`).toISOString().slice(0, 19).replace('T', ' ');
+  // Envoi vers Zapier (non bloquant)
+  fetch("https://hooks.zapier.com/hooks/catch/23241500/2vpx4o1/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(() => console.log("✅ Données envoyées à Zapier"))
+  .catch((zapierError) => console.warn("⚠️ Erreur Zapier (non bloquante) :", zapierError));
 
-      try {
-        const res = await databases.listDocuments(databaseId, collectionId, [
-          Query.equal("date", fullDate),
-          Query.equal("time", hour)
-        ]);
+  // Affichage du message de confirmation
+  message.innerText = "✅ Réservation confirmée. Merci !";
+  message.classList.remove('error');
+  message.classList.add('success');
 
-        const count = res.documents.length;
-        const remaining = TOTAL_TABLES - count;
+  form.reset();
 
-        if (remaining <= 0) {
-          option.disabled = true;
-          option.textContent = `${hour} (Complet)`;
-        } else {
-          option.disabled = false;
-          option.textContent = `${hour} (${remaining} tables dispo)`;
-        }
-      } catch (err) {
-        console.warn("⚠️ Erreur vérif horaire :", err);
-        // En cas d'erreur on laisse option dispo, texte original
-        option.disabled = false;
-        option.textContent = hour;
-      }
-    }
-  }
+  await updateTimeOptions();
 
-  // Met à jour les heures quand on change de jour
-  dateInput.addEventListener('change', updateTimeOptions);
+  // Supprime le message après l'animation (3s)
+  setTimeout(() => {
+    message.innerText = "";
+    message.classList.remove('success');
+  }, 3000);
 
-  // Appel initial au chargement
-  window.addEventListener('load', () => {
-    updateTimeOptions();
-  });
+} catch (error) {
+  console.error("❌ Erreur Appwrite :", error);
+  message.innerText = "❌ Erreur lors de la réservation.";
+  message.classList.remove('success');
+  message.classList.add('error');
+  form.classList.add('error');
+  setTimeout(() => form.classList.remove('error'), 400);
+}
 
-  // Gestion de la soumission du formulaire
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const selectedDate = new Date(`${form.date.value}T${form.time.value}`);
-  const formattedDate = selectedDate.toISOString().slice(0, 19).replace('T', ' ');
-
-  // Vérifie s’il reste des tables pour le créneau choisi
-  try {
-    const existing = await databases.listDocuments(databaseId, collectionId, [
-      Query.equal("date", formattedDate),
-      Query.equal("time", form.time.value)
-    ]);
-
-    if (existing.documents.length >= TOTAL_TABLES) {
-      message.innerText = "❌ Ce créneau est complet. Merci d’en choisir un autre.";
-      return;
-    }
-  } catch (error) {
-    console.warn("⚠️ Erreur Appwrite check :", error);
-    message.innerText = "❌ Problème de connexion, veuillez réessayer.";
-    return;
-  }
 
   const data = {
     name: form.name.value,
@@ -648,7 +637,7 @@ form.addEventListener('submit', async (e) => {
     form.classList.add('error');
     setTimeout(() => form.classList.remove('error'), 400);
   }
-});
+}
 
 </script>
 
