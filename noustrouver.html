@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nous Trouver - Le Green Bar</title>
+  <title>Nous Trouver</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <style>
     * {
@@ -12,25 +12,48 @@
       box-sizing: border-box;
     }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Playfair Display', serif;
-  background-color: #0a0a0a;
-  color: #fff;
-  min-height: 100vh;
+    html, body {
+      height: 100%;
+      min-height: 100%;
+    }
+  body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  overflow-x: hidden;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #0a0a0a url('block5.png') center center/cover no-repeat;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  padding-top: 90px;
+  text-align: center;
+}
+/* Pour que l'image de fond prenne vraiment tout l'écran */
+body {
+  background: #0a0a0a url('block5.png') center center/cover no-repeat fixed;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Ajoute un voile sombre sur le fond */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65); /* ajuste l'opacité si besoin */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Mets la box au-dessus du fond */
+main, header, footer {
+  position: relative;
+  z-index: 1;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centre le contenu verticalement */
+  justify-content: center;
   background: #111;
   border-radius: 24px;
   box-shadow: 0 0 40px rgba(0, 255, 128, 0.08);
@@ -40,373 +63,375 @@ body {
   gap: 40px;
   margin: auto;
   animation: fadeIn 0.8s ease-out;
-  text-align: center; /* Centre le texte */
+  text-align: center;
+}
+    main {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    
+    /* Ajoute ou modifie cette règle pour espacer la box du footer */
+main {
+  margin-bottom: 80px; /* augmente la valeur pour plus d'espace */
 }
 
-.text-content {
-  text-align: center; /* Centre aussi le texte à l'intérieur */
+@media (max-width: 600px) {
+  main {
+    margin-bottom: 120px; /* encore plus d'espace sur mobile si besoin */
+  }
 }
 
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      border-radius: 24px;
+      box-shadow: 0 0 40px rgba(0, 255, 128, 0.08);
+      max-width: 900px;
+      width: 100%;
+      padding: 50px 30px;
+      gap: 40px;
+      margin: auto;
+      animation: fadeIn 0.8s ease-out;
+      text-align: center;
+    }
 
+    .text-content {
+      text-align: center;
+    }
 
 .image-box {
   width: 100%;
-  max-width: 500px;
-  height: 280px;
+  max-width: 350px;
+  aspect-ratio: 1 / 1;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 255, 128, 0.05);
-}
-
-.image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
+  margin: 0 auto 30px auto;
+  background-image: url('block5.png'); /* Met l'image en fond */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: block;
+  /* SUPPRIME le <img> dans le HTML */
 }
 
-.text-content h1 {
-  font-size: 42px;
-  margin-bottom: 16px;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 255, 128, 0.15);
-}
-
-.text-content p {
-  font-size: 18px;
-  color: #cccccc;
-  margin-bottom: 28px;
-  line-height: 1.6;
-}
-
-.btn-waze {
-  display: inline-block;
-  padding: 14px 36px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #ffffff;
-  background: rgba(0, 255, 128, 0.08);
-  border: 1px solid rgba(0, 255, 128, 0.2);
-  border-radius: 50px;
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-}
-
-.btn-waze:hover {
-  background: rgba(0, 255, 128, 0.15);
-  color: #00ff88;
-  border-color: rgba(0, 255, 128, 0.3);
-  transform: scale(1.04);
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive tablette / mobile */
-@media (max-width: 768px) {
+/* Sur mobile, plus grand carré */
+@media (max-width: 600px) {
   .image-box {
-    height: 220px;
-  }
-
-  .text-content h1 {
-    font-size: 32px;
-  }
-
-  .text-content p {
-    font-size: 16px;
-  }
-
-  .btn-waze {
-    padding: 12px 28px;
-    font-size: 15px;
+    width: 90vw;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+    min-height: 0;
   }
 }
 
+    .text-content h1 {
+      font-size: 42px;
+      margin-bottom: 16px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0, 255, 128, 0.15);
+    }
 
-    
-@media (max-width: 600px) {
-  header {
-    position: fixed !important;
-    top: 5px !important;
-    left: 10px !important;
-    right: 10px !important;
-    padding: 8px 15px !important;
-    background: rgba(0, 0, 0, 0.9) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 17px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    z-index: 1100 !important;
-    box-shadow: 0 1px 100px rgba(0, 0, 0, 0.308) !important;
-  }
+    .text-content p {
+      font-size: 18px;
+      color: #cccccc;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
 
+    .btn-waze {
+      position: relative;
+      display: inline-block;
+      padding: 12px 24px; /* réduit la longueur */
+      font-size: 17px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      color: #ffffff;
+      background: linear-gradient(135deg, rgba(0, 255, 128, 0.12), rgba(0, 255, 128, 0.06));
+      border: 1.5px solid rgba(0, 255, 128, 0.25);
+      border-radius: 50px;
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 12px rgba(0, 255, 128, 0.15), 0 0 32px rgba(0, 255, 128, 0.05) inset;
+      overflow: hidden;
+      transition: all 0.35s ease;
+    }
 
-  body {
-    font-size: 4px !important;
-    line-height: 1.4 !important;
-  }
-}
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 34px !important;
-  }
-}
+    .btn-waze::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(0, 255, 128, 0.15) 40%,
+        rgba(0, 255, 128, 0.25) 60%,
+        transparent 100%
+      );
+      transition: all 0.7s ease;
+    }
 
+    .btn-waze:hover::before {
+      left: 100%;
+    }
 
+    .btn-waze:hover {
+      background: rgba(0, 255, 128, 0.2);
+      border-color: rgba(0, 255, 128, 0.4);
+      color: #00ff99;
+      box-shadow: 0 0 20px rgba(0, 255, 128, 0.3), 0 0 40px rgba(0, 255, 128, 0.15) inset;
+      transform: scale(1.05);
+    }
 
-    header {
-  display: flex;
-  align-items: center;
-  padding: 10px 40px;
-  background: #000000;
-  backdrop-filter: blur(8px);
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-}
-
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 42px;
-  flex-shrink: 0;
-}
-
-nav {
-  flex: 1;
-  display: flex;
-  justify-content: center; /* centre horizontalement le menu */
-  font-size: 19px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 37px;
-  margin: 0; /* au cas où */
-  padding: 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: white;
-  font-weight: 600;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color:  #e26dff;
-}
-
-@media (max-width: 600px) {
-  nav {
-    position: fixed;
-    top: 60px; /* sous header */
-    right: 20px;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(12px);
-    border-radius: 12px;
-    padding: 20px 30px;
-    display: none; /* caché par défaut */
-    flex-direction: column;
-    gap: 20px;
-    font-size: 20px;
-    font-weight: 500;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    z-index: 210;
-    min-width: 240px;
-    max-width: 320px;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    transform-origin: top right;
-    will-change: transform, opacity;
-  }
-
-  nav.active {
-    display: flex !important;
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Animation douce d'apparition */
-  nav:not(.active) {
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
-  }
-
-  nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-size: 18px;
-  }
-
-  nav ul li a:hover,
-  nav ul li a:focus {
-    background-color: #ffffff;
-    color: #000;
-    outline: none;
-  }
-
-/* Bouton hamburger épuré et premium */
-.menu-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 36px;
-  height: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  z-index: 300;
-  background: transparent;
-  border: none;
-  padding: 0;
-  user-select: none;
-  filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7)); /* vert sombre avec transparence */
-  transition: filter 0.3s ease;
-}
-
-.menu-toggle:hover {
-  filter: drop-shadow(0 0 8px rgb(0, 207, 0)); /* vert saturé au hover */
-}
-
-.menu-toggle span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background-color: #00c700; /* vert forêt, élégant et premium */
-  border-radius: 3px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5); /* ombre verte douce */
-}
-
-
-  /* Animation du menu toggle quand actif (optionnel) */
-  .menu-toggle.active span:nth-child(1) {
-    transform: translateY(12px) rotate(45deg);
-    background-color: #fff;
-    box-shadow: 0 2px 12px #fff;
-  }
-
-  .menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .menu-toggle.active span:nth-child(3) {
-    transform: translateY(-12px) rotate(-45deg);
-    background-color: #fff;
-    box-shadow: 0 2px 12px #fff;
-  }
-}
-
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        padding: 40px 20px;
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
       }
-
-      .image-box, .text-content {
-        margin: 20px 0;
-        max-width: 100%;
-        text-align: center;
-      }
-
-      .text-content h1 {
-        font-size: 32px;
-      }
-
-      .text-content p {
-        font-size: 16px;
-      }
-
-      .btn-waze {
-        width: 100%;
-        padding: 14px;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-       /* MOBILES (≤ 1024px) */
-@media (max-width: 1024px) {
-  .hero-text {
-    font-size: 28px;
-  }
+    /* Responsive tablette / mobile */
+    @media (max-width: 768px) {
+      .image-box {
+        height: 220px;
+      }
+      .text-content h1 {
+        font-size: 32px;
+      }
+      .text-content p {
+        font-size: 16px;
+      }
+      .btn-waze {
+        padding: 10px 18px;
+        font-size: 15px;
+      }
+      .container {
+        padding: 40px 20px;
+      }
+    }
 
-  .hero-button {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
+    @media (max-width: 600px) {
+      header {
+        position: fixed !important;
+        top: 5px !important;
+        left: 10px !important;
+        right: 10px !important;
+        padding: 8px 15px !important;
+        background: rgba(0, 0, 0, 0.9) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: 17px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        z-index: 1100 !important;
+        box-shadow: 0 1px 100px rgba(0, 0, 0, 0.308) !important;
+      }
+      body {
+        font-size: 4px !important;
+        line-height: 1.4 !important;
+      }
+      header h1 {
+        font-size: 34px !important;
+      }
+    }
 
-  .about-text p {
-    font-size: 20px;
-    line-height: 1.6;
-  }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 40px;
+      background: #000000;
+      backdrop-filter: blur(8px);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+    }
 
-  #about h3,
-  #avis h3 {
-    font-size: 28px;
-  }
+    header h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 42px;
+      flex-shrink: 0;
+    }
 
-  .testimonial {
-    padding: 25px 20px;
-    min-width: auto;
-  }
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      font-size: 19px;
+    }
 
-  .testimonial p {
-    font-size: 1.1rem;
-  }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 37px;
+      margin: 0;
+      padding: 0;
+    }
 
-  .bottom-logo {
-    font-size: 40px;
-    bottom: 20px;
-    left: 10px;
-  }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
 
-  .hero-overlay {
-    top: 40px;
-    left: 20px;
-  }
-}
+    nav a:hover {
+      color:  #e26dff;
+    }
 
-/* Cacher le bouton classique sur mobile */
-@media (max-width: 1024px) {
-  .btn-reservation {
-    display: none;
-  }
-}
+    @media (max-width: 600px) {
+      nav {
+        position: fixed;
+        top: 60px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 12px;
+        padding: 20px 30px;
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 20px;
+        font-weight: 500;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        z-index: 210;
+        min-width: 240px;
+        max-width: 320px;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        transform-origin: top right;
+        will-change: transform, opacity;
+      }
+      nav.active {
+        display: flex !important;
+        opacity: 1;
+        transform: scale(1);
+      }
+      nav:not(.active) {
+        opacity: 0;
+        transform: scale(0.95);
+        pointer-events: none;
+      }
+      nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: left; 
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        font-size: 18px;
+      }
+      nav ul li a:hover,
+      nav ul li a:focus {
+        background-color: #ffffff;
+        color: #000;
+        outline: none;
+      }
+      .menu-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        z-index: 300;
+        background: transparent;
+        border: none;
+        padding: 0;
+        user-select: none;
+        filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7));
+        transition: filter 0.3s ease;
+      }
+      .menu-toggle:hover {
+        filter: drop-shadow(0 0 8px rgb(0, 207, 0));
+      }
+      .menu-toggle span {
+        display: block;
+        height: 4px;
+        width: 100%;
+        background-color: #00c700;
+        border-radius: 3px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5);
+      }
+      .menu-toggle.active span:nth-child(1) {
+        transform: translateY(12px) rotate(45deg);
+        background-color: #fff;
+        box-shadow: 0 2px 12px #fff;
+      }
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-12px) rotate(-45deg);
+        background-color: #fff;
+        box-shadow: 0 2px 12px #fff;
+      }
+    }
+
+    h2 {
+      font-size: 52px;
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-bottom: 60px;
+      padding-top: 20px;
+      color: #fff;
+      position: relative;
+    }
+    h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #00c773;
+      margin: 20px auto 0;
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+      }
+      h2::after {
+        width: 50px;
+        height: 3px;
+        margin-top: 16px;
+      }
+    }
 
 /* Bouton flottant mobile */
 .floating-btn {
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 768px) {
   .floating-btn {
     display: block;
     position: fixed;
@@ -428,94 +453,325 @@ nav a:hover {
     background-color: #005200;
   }
 }
+.footer {
+  width: 100vw;
+  background: #111; /* 100% opaque, pas de rgba */
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #aaa;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-shrink: 0;
+  z-index: 1001;
+  margin-top: 0;
+  border-top: 1.5px solid #222;
+}
 
-    
+@media (max-width: 600px) {
+  .footer {
+    position: static !important;
+    width: 100vw;
+    padding-bottom: 30px;
+    border-top: 1.5px solid #222;
+    background: #111 !important;
+    z-index: 1 !important;
+  }
+}
+
+    .reservation-button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  color: black;
+}
+
+.reservation-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(130, 82%, 33%);
+  color: white;
+  box-shadow: rgb(0, 116, 10) 0px 7px 29px 0px;
+}
+
+.reservation-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(128, 84%, 37%);
+  color: white;
+  box-shadow: rgb(41, 112, 0) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+/* Responsive : cache le bouton sur mobile */
+@media screen and (max-width: 768px) {
+  .reservation-button {
+    display: none;
+  }
+}
+
+
+
+
+.jiloe-box {
+  background: rgba(20, 20, 20, 0.85);
+  padding: 50px 40px;
+  border-radius: 30px;
+  box-shadow: 0 0 40px rgba(152, 255, 173, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(144, 255, 167, 0.08);
+  transform: perspective(800px) rotateX(0deg) rotateY(-5deg);
+  animation: fadeIn 1s forwards ease-out 0.3s;
+}
+
+/* Ajoute ou modifie ces règles dans ton CSS */
+/* Pour que la box ne touche jamais les bords */
+.jiloe-box {
+  margin: 40px auto 0 auto;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media (max-width: 600px) {
+  .jiloe-box {
+    margin-left: 12px;
+    margin-right: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+.jiloe-box-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.jiloe-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #baff9c;
+  letter-spacing: 1.2px;
+  text-shadow: 2px 2px 12px rgba(144, 255, 167, 0.2);
+  text-align: center;
+}
+
+.jiloe-address {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  color: #dddddd;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.jiloe-map {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(144, 255, 167, 0.1);
+  border: 1px solid rgba(152, 255, 173, 0.05);
+  background-color: #1a1a1a;
+}
+
+.jiloe-hours {
+  font-size: 1rem;
+  color: #aaffcc;
+  font-family: 'Inter', sans-serif;
+  margin-top: -10px;
+}
+
+.jiloe-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.jiloe-btn {
+  padding: 14px 28px;
+  border-radius: 50px;
+  background: linear-gradient(to right, #d8ffe0, #ffffff);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #000;
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(144, 255, 167, 0.15);
+}
+
+.jiloe-btn:hover {
+  transform: scale(1.04);
+  background: linear-gradient(to right, #baff9c, #e6ffe2);
+  box-shadow: 0 8px 25px rgba(144, 255, 167, 0.25);
+}
+
+.jiloe-btn:active {
+  transform: scale(0.97);
+  background: linear-gradient(to right, #9bdc91, #ccfcd1);
+}
+
+
+
+/* Responsive */
+@media (max-width: 600px) {
+  .jiloe-box {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .jiloe-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Delicio</h1>
+    <h1>[block]</h1>
     <div class="menu-toggle" id="menu-toggle">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<nav>
-  <ul>
-    <li><a href="menu.html">Menu</a></li>
-    <li><a href="about">À propos</a></li>
-    <li><a href="reservation.html">Réservations</a></li>
-    <li><a href="noustrouver.html">Nous trouver</a></li>
-    <li><a href="galerie.html">En images</a></li>
-    <li><a href="contact">Contact</a></li>
-  </ul>
-</nav>
-
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Acceuil</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="evenement.html">Evenement</a></li>
+        <li><a href="noustrouver.html">Nous trouver</a></li>
+        <li><a href="galerie.html">En images</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="reservation.html" class="reservation-button">Réserver</a>
   </header>
 
-  <a href="reservation.html" class="floating-btn">Réserver</a>
+<main>
+  <h2 style="text-align: center; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.8rem; color: white; margin-bottom: -10px;">
+    Nous trouver
+  </h2>
 
+  <div class="jiloe-box">
+    <div class="jiloe-box-content">
+      <div class="jiloe-title">Le Green Bar</div>
 
-<script>
-    const img = document.getElementById('menuImage');
-    const lightbox = document.getElementById('lightbox');
-    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
-    img.addEventListener('click', () => lightbox.classList.add('active'));
-  </script>
-  <script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const nav = document.querySelector('nav');
+      <div class="jiloe-address">
+        21 Avenue des Étoiles, 75000 Paris
+      </div>
 
-  function toggleMenu() {
-    const isActive = nav.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-    menuToggle.setAttribute('aria-expanded', isActive);
+      <div class="jiloe-map">
+        <iframe
+          src="https://www.google.com/maps?q=21+Avenue+des+Étoiles,+75000+Paris&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0; border-radius: 14px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
 
-    if (isActive) {
-      const firstLink = nav.querySelector('a');
-      if (firstLink) firstLink.focus();
-    } else {
-      menuToggle.focus();
-    }
-  }
+      <div class="jiloe-hours">Ouvert de 17h à 2h du matin</div>
 
-  menuToggle.addEventListener('click', toggleMenu);
-
-  document.addEventListener('click', (e) => {
-    if (
-      nav.classList.contains('active') &&
-      !nav.contains(e.target) &&
-      !menuToggle.contains(e.target)
-    ) {
-      nav.classList.remove('active');
-      menuToggle.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', false);
-      menuToggle.focus();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('active')) {
-      nav.classList.remove('active');
-      menuToggle.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', false);
-      menuToggle.focus();
-    }
-  });
-</script>
-
-  <div class="container">
-    <div class="image-box">
-      <img src="bloc2.png" alt="Devanture Le Green Bar">
-    </div>
-    <div class="text-content">
-      <h1>Le Green Bar</h1>
-      <p>📍 21 Avenue des Étoiles, 75000 Paris</p>
-      <a class="btn-waze" href="https://waze.com/ul?ll=48.856614,2.3522219&navigate=yes" target="_blank" rel="noopener noreferrer">
-        🚗 Ouvrir dans Waze
-      </a>
+      <div class="jiloe-btns">
+        <a class="jiloe-btn" href="https://waze.com/ul?ll=48.856614,2.3522219&navigate=yes" target="_blank" rel="noopener noreferrer">
+          Ouvrir dans Waze
+        </a>
+        <a class="jiloe-btn" href="tel:0123456789">
+          Appeler
+        </a>
+      </div>
     </div>
   </div>
 
+  <a href="reservation.html" class="floating-btn">Réserver</a>
+</main>
+
+  <footer class="footer">
+    &copy; 2025 [block]. Tous droits réservés.
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('nav');
+
+    function toggleMenu() {
+      const isActive = nav.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isActive);
+
+      if (isActive) {
+        const firstLink = nav.querySelector('a');
+        if (firstLink) firstLink.focus();
+      } else {
+        menuToggle.focus();
+      }
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    document.addEventListener('click', (e) => {
+      if (
+        nav.classList.contains('active') &&
+        !nav.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', false);
+        menuToggle.focus();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', false);
+        menuToggle.focus();
+      }
+    });
+  </script>
 </body>
 </html>

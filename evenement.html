@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diffusions Sportives | Le Green Bar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -15,78 +15,295 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0f0f0f;
-      color: #d0ffd8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      color: #ffffff;
       min-height: 100vh;
-      padding: 60px 20px;
       background-image: url('salon.jpg');
       background-size: cover;
       background-position: center;
       position: relative;
       z-index: 0;
+      display: block;
+      padding: 0;
+      overflow-x: hidden;
     }
 
     body::after {
       content: "";
-      position: absolute;
+      position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
       z-index: -1;
+      pointer-events: none;
     }
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 600;
-      color: #baff9c;
-      margin-bottom: 50px;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    
+      header {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  background: #000000;
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 42px;
+  flex-shrink: 0;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centre horizontalement le menu */
+  font-size: 19px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 37px;
+  margin: 0; /* au cas où */
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color:  #e26dff;
+}
+
+@media (max-width: 600px) {
+  nav {
+    position: fixed;
+    top: 60px; /* sous header */
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 20px 30px;
+    display: none; /* caché par défaut */
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana,sa ns-serif;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    z-index: 210;
+    min-width: 240px;
+    max-width: 320px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform-origin: top right;
+    will-change: transform, opacity;
+  }
+
+  nav.active {
+    display: flex !important;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Animation douce d'apparition */
+  nav:not(.active) {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 18px;
+  }
+
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background-color: #ffffff;
+    color: #000;
+    outline: none;
+  }
+
+/* Bouton hamburger épuré et premium */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 300;
+  background: transparent;
+  border: none;
+  padding: 0;
+  user-select: none;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 0, 0.7)); /* vert sombre avec transparence */
+  transition: filter 0.3s ease;
+}
+
+.menu-toggle:hover {
+  filter: drop-shadow(0 0 8px rgb(0, 207, 0)); /* vert saturé au hover */
+}
+
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: #00c700; /* vert forêt, élégant et premium */
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(34, 139, 34, 0.5); /* ombre verte douce */
+}
+
+
+  /* Animation du menu toggle quand actif (optionnel) */
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+    background-color: #fff;
+    box-shadow: 0 2px 12px #fff;
+  }
+}
+.highlighted-events {
+  width: 100%;
+  padding: 120px 20px 100px;
+  background: url('bloc3.png') center/cover no-repeat;
+  position: relative;
+  box-sizing: border-box;
+  z-index: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Superposition sombre (effet glassy dark) */
+.highlighted-events::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.274), rgba(15, 15, 15, 0.95));
+  z-index: 1;
+}
+
+/* Pour que le contenu passe bien par-dessus */
+.highlighted-events > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+    .highlighted-events h3 {
+      font-size: 2.2rem;
       text-align: center;
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      margin-bottom: 60px;
+      position: relative;
+      margin-top: 0;
+    }
+
+    .highlighted-events h3::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #00c700;
+      margin: 25px auto 0;
+      border-radius: 2px;
     }
 
     .event-list {
       display: grid;
       grid-template-columns: 1fr;
       gap: 30px;
-      width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .event-card {
       background: #1a1a1a;
-      border: none;
-      border-bottom: 2px solid #2e4a27;
-      box-shadow: inset 0 0 5px rgba(91, 255, 140, 0.15), 0 8px 20px rgba(0, 0, 0, 0.25);
-      border-radius: 16px;
-      padding: 25px 30px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: inset 0 0 5px rgba(110, 255, 91, 0.15), 0 8px 20px rgba(0, 0, 0, 0.25);
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
     }
 
-    .event-card:hover {
-      border-bottom: 2px solid #a4ffba;
-      transform: scale(1.02);
-      box-shadow: 0 12px 30px rgba(144, 255, 167, 0.25);
+    .event-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-info {
+      padding: 25px 30px;
+      display: flex;
+      flex-direction: column;
     }
 
     .event-title {
       font-size: 1.5rem;
       font-weight: 600;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .event-date {
       font-size: 1rem;
-      color: #98ffae;
+      color: #a5ff82;
     }
 
-    .no-events {
-      font-size: 1.2rem;
-      color: #88aa88;
-      text-align: center;
-      margin-top: 60px;
+    .event-card:hover {
+      transform: scale(1.015);
+      box-shadow: 0 12px 30px rgba(144, 255, 167, 0.25);
+      border-bottom: 2px solid #77ff4e;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (min-width: 700px) {
@@ -94,24 +311,237 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
+    @media (max-width: 600px) {
+      header {
+        position: fixed !important;
+        top: 5px !important;
+        left: 10px !important;
+        right: 10px !important;
+        padding: 8px 15px !important;
+        background: rgba(0, 0, 0, 0.9) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: 17px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        z-index: 1100 !important;
+        box-shadow: 0 1px 100px rgba(0, 0, 0, 0.308) !important;
+      }
+      .highlighted-events {
+        padding-top: 90px;
+        padding-bottom: 60px;
+      }
+      .highlighted-events h3 {
+        font-size: 2.0rem;
+        margin-bottom: 30px;
+      }
+      .highlighted-events h3::after {
+        width: 40px;
+        height: 3px;
+        margin-top: 12px;
+      }
+      .event-card img {
+        height: 200px;
+      }
+      .event-info {
+        padding: 18px 10px;
+      }
+    }
+
+      
+@media (max-width: 600px) {
+  header {
+    position: fixed !important;
+    top: 5px !important;
+    left: 10px !important;
+    right: 10px !important;
+    padding: 8px 15px !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 17px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    z-index: 1100 !important;
+    box-shadow: 0 1px 100px rgba(0, 0, 0, 0.308) !important;
+  }
+
+
+  body {
+    font-size: 4px !important;
+    line-height: 1.4 !important;
+  }
+}
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 34px !important;
+  }
+}
+
+    /* Bouton flottant mobile */
+    .floating-btn {
+      display: none;
+    }
+    @media (max-width: 1024px) {
+      .floating-btn {
+        display: block;
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background-color: #008f18;
+        color: #fff;
+        padding: 14px 22px;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 700;
+        z-index: 10000;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+      }
+      .floating-btn:hover {
+        background-color: #005200;
+      }
+    }
+
+
+    html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1 0 auto;
+}
+.footer {
+  width: 100%;
+  background: #111;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #aaa;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+  right: 0;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
   </style>
 </head>
 <body>
 
-  <h1>📺 Diffusions </h1>
+  <header>
+    <h1>[block]</h1>
+    <div class="menu-toggle" id="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<nav>
+  <ul>
+    <li><a href="index.html">Acceuil</a></li>
+    <li><a href="menu.html">Menu</a></li>
+    <li><a href="evenement.html">Evenement</a></li>
+    <li><a href="noustrouver.html">Nous trouver</a></li>
+    <li><a href="galerie.html">En images</a></li>
+    <li><a href="contact">Contact</a></li>
+  </ul>
+</nav>
+<!-- From Uiverse.io by alexroumi --> 
+<a href="reservation.html" class="reservation-button">Réserver</a>
+</button>
+  </header>
 
-  <div class="event-list" id="events">
-    <div class="event-card">
-      <div class="event-title">France 🇫🇷 vs Espagne 🇪🇸</div>
-      <div class="event-date">Vendredi 21 juin — 20h45</div>
+  <section class="highlighted-events">
+    <h3>Événements diffusés</h3>
+    <div class="event-list">
+      <div class="event-card">
+        <img src="match.png" alt="France - Espagne" />
+        <div class="event-info">
+          <div class="event-title">France - Espagne</div>
+          <div class="event-date">Vendredi 28 Juin · 19h30</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="match3.png" alt="PSG - Arsenal" />
+        <div class="event-info">
+          <div class="event-title">PSG - ARSENAL</div>
+          <div class="event-date">Samedi 6 Juillet · 21h00</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="match2.png" alt="Spurs - Warriors" />
+        <div class="event-info">
+          <div class="event-title">Spurs - Warriors</div>
+          <div class="event-date">Dimanche 14 Juillet · 11h00</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="mojito.png" alt="Afterwork Mojitos" />
+        <div class="event-info">
+          <div class="event-title">Afterwork Mojitos</div>
+          <div class="event-date">Jeudi 18 Juillet · 18h30</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="event-card">
-      <div class="event-title">Italie 🇮🇹 vs Allemagne 🇩🇪</div>
-      <div class="event-date">Samedi 22 juin — 21h00</div>
-    </div>
-  </div>
+  <a href="reservation.html" class="floating-btn">Réserver</a>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('nav');
+
+    function toggleMenu() {
+      const isActive = nav.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isActive);
+
+      if (isActive) {
+        const firstLink = nav.querySelector('a');
+        if (firstLink) firstLink.focus();
+      } else {
+        menuToggle.focus();
+      }
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    document.addEventListener('click', (e) => {
+      if (
+        nav.classList.contains('active') &&
+        !nav.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', false);
+        menuToggle.focus();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', false);
+        menuToggle.focus();
+      }
+    });
+  </script>
+
+  <footer class="footer">
+  &copy; 2025 [block]. Tous droits réservés.
+</footer>
+
+
 
 </body>
 </html>
-

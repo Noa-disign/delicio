@@ -896,31 +896,86 @@ nav a:hover {
   margin-bottom: 40px; /* ↓ ajuste cette valeur selon le besoin */
 }
 
-
 #avis {
   padding: 160px 80px;
-  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(145deg, #000000, #000000);
   border-radius: 30px;
   color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+  
+.avis-slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
-#avis h3 {
-  font-size: 56px;
-  text-align: center;
-  margin-bottom: 80px;
-  font-family: 'Playfair Display', serif;
+.avis-slider {
+  display: flex;
+  gap: 40px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  max-width: 1000px;
+  transition: transform 0.5s cubic-bezier(.77,0,.18,1);
+}
+
+.avis-card {
+  min-width: 600px;
+  background: #111;
+  border-radius: 18px;
+  padding: 50px 40px;
+  box-shadow: 0 10px 40px rgba(0, 255, 135, 0.15);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
   position: relative;
 }
 
-#avis h3::after {
-  content: "";
-  display: block;
-  width: 80px;
-  height: 5px;
-  background: #00c700;
-  margin: 25px auto 0;
-  border-radius: 2px;
+.avis-prev,
+.avis-next {
+  background: transparent;
+  border: none;
+  font-size: 2.5rem;
+  color: #00c700;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 2;
 }
+
+.avis-pagination {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.avis-pagination .dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: #444;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.avis-pagination .dot.active {
+  background-color: #00c700;
+}
+
+@media (max-width: 768px) {
+  .avis-card {
+    min-width: 90vw;
+    padding: 30px 20px;
+  }
+  .avis-slider {
+    gap: 20px;
+    max-width: 95vw;
+  }
+}
+
+
+
 
 .testimonials {
   display: flex;
@@ -1081,18 +1136,55 @@ nav a:hover {
   perspective: 1000px;
 }
 
-@media screen and (max-width: 768px) {
+/* CACHÉ sur les écrans ≤ 1024px (mobiles/tablettes) */
+@media screen and (max-width: 1024px) {
   .polaroid-image-container {
     display: none !important;
   }
 }
 
+/* CACHÉ sur les écrans ≤ 1440px (donc MacBook inclus) */
+@media screen and (max-width: 1440px) {
+  .polaroid-image-container {
+    display: none !important;
+  }
+}
+
+/* PAR DÉFAUT : visible uniquement au-delà de 1440px */
+.polaroid-image-container {
+  position: relative;
+  z-index: 10;
+  margin-bottom: -340px;
+  margin-left: 170px;
+  display: flex;
+  justify-content: left;
+  perspective: 1000px;
+}
+
+.polaroid-image-container img {
+  width: 200px;
+  max-width: 90vw;
+  border: 5px solid white;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  background: white;
+  transform: rotate(-7deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.polaroid-image-container img:hover {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
 
 
 .polaroid-image-container img {
-  width: 300px;
+  width: 220px;
   max-width: 90vw;
-  border: 12px solid white;
+  border: 6px solid white;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   background: white;
@@ -1346,13 +1438,14 @@ nav a:hover {
   position: relative;
   z-index: 0;
   font-family: 'Playfair Display', serif;
+  margin-bottom: -110px; /* Ajout d'une marge pour séparer des sections suivantes */
 }
 
 .highlighted-events::after {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgb(0, 0, 0);
   z-index: -1;
 }
 
@@ -1541,8 +1634,8 @@ nav a:hover {
 </div>
 <nav>
   <ul>
+    <li><a href="index.html">Acceuil</a></li>
     <li><a href="menu.html">Menu</a></li>
-    <li><a href="about">À propos</a></li>
     <li><a href="evenement.html">Evenement</a></li>
     <li><a href="noustrouver.html">Nous trouver</a></li>
     <li><a href="galerie.html">En images</a></li>
@@ -1595,7 +1688,7 @@ nav a:hover {
   <div class="dishes">
     <div class="dish">
       <div class="dish-image">
-        <img src="ravioli.jpg" alt="Plat 1">
+        <img src="raviolib.png" alt="Plat 1">
       </div>
       <div class="dish-info">
         <h4>Raviolis maison au basilic</h4>
@@ -1604,7 +1697,7 @@ nav a:hover {
     </div>
     <div class="dish">
       <div class="dish-image">
-        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1" alt="Plat 2">
+        <img src="filett.png" alt="Plat 2">
       </div>
       <div class="dish-info">
         <h4>Filet de boeuf aux herbes</h4>
@@ -1627,7 +1720,7 @@ nav a:hover {
 
 <section class="highlighted-events">
   <div class="scroll-in">
-  <h3>Événements à ne pas manquer</h3>
+  <h3>Événements diffuser</h3>
   <div class="event-list">
     <div class="event-card">
       <img src="match.png" alt="Dégustation" />
@@ -1796,6 +1889,8 @@ nav a:hover {
     }
   });
 </script>
+
+
 
 
 <script>

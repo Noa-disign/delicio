@@ -12,19 +12,22 @@
       padding: 0;
     }
 
-    body {
-      background-color: #0a0a0a;
-      color: #fff;
-      font-family: 'Playfair Display', serif;
-      padding: 100px 40px;
-    }
+body {
+  background-color: #0a0a0a;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+
+}
 
     h2 {
       font-size: 52px;
       text-align: center;
+      font-family: 'Playfair Display', serif;
       margin-bottom: 60px;
       color: #fff;
       position: relative;
+      margin-top: 100px; /* adapte à la hauteur réelle de ton header */
+
     }
 
     h2::after {
@@ -58,6 +61,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  padding-bottom: 40px; /* Espace en bas pour le footer */
 }
 
 
@@ -83,13 +87,7 @@
       box-shadow: 0 12px 40px rgba(0, 255, 128, 0.15);
     }
 
-    .footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 14px;
-      color: #aaa;
-      margin-top: 100px;
-    }
+
 
     /* Lightbox */
     #lightbox {
@@ -173,7 +171,7 @@
 }
 
 header h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   font-size: 42px;
   flex-shrink: 0;
 }
@@ -409,32 +407,112 @@ nav a:hover {
   }
 }
 
+    .reservation-button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  color: black;
+}
+
+.reservation-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(130, 82%, 33%);
+  color: white;
+  box-shadow: rgb(0, 116, 10) 0px 7px 29px 0px;
+}
+
+.reservation-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(128, 84%, 37%);
+  color: white;
+  box-shadow: rgb(41, 112, 0) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+/* Responsive : cache le bouton sur mobile */
+@media screen and (max-width: 768px) {
+  .reservation-button {
+    display: none;
+  }
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Pas de padding/margin horizontal ici */
+}
+main {
+  flex: 1 0 auto;
+}
+.footer {
+  width: 100%;
+  background: #111;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #aaa;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+  right: 0;
+  flex-shrink: 0;
+  z-index: 10;
+  /* Pas de margin ni de max-width ici */
+}
+
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Delicio</h1>
-    <div class="menu-toggle" id="menu-toggle">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<nav>
-  <ul>
-    <li><a href="menu.html">Menu</a></li>
-    <li><a href="about">À propos</a></li>
-    <li><a href="reservation.html">Réservations</a></li>
-    <li><a href="noustrouver.html">Nous trouver</a></li>
-    <li><a href="galerie.html">En images</a></li>
-    <li><a href="contact">Contact</a></li>
-  </ul>
-</nav>
+<header>
+  <div class="header-left">
+    <h1>[block]</h1>
+  </div>
+  <div class="header-center">
+    <nav>
+      <ul>
+        <li><a href="index.html">Acceuil</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="evenement.html">Evenement</a></li>
+        <li><a href="noustrouver.html">Nous trouver</a></li>
+        <li><a href="galerie.html">En images</a></li>
+        <li><a href="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="header-right">
+    <a href="reservation.html" class="reservation-button">Réserver</a>
+    <div class="menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
 
-  </header>
+<main>
 
+<h2>Notre Galerie</h2>
 
-  <h2>Notre Galerie</h2>
 
   <div class="gallery">
     <a href="bloc2.png"><img src="bloc2.png" onerror="this.parentNode.style.display='none'"></a>
@@ -449,12 +527,11 @@ nav a:hover {
     <img src="">
   </div>
 
-  <div class="footer">
-    &copy; 2025 Le Green Bar. Tous droits réservés.
-  </div>
-
+</main>
   <a href="reservation.html" class="floating-btn">Réserver</a>
 
+
+  
   <script>
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = lightbox.querySelector("img");
@@ -516,7 +593,11 @@ nav a:hover {
   });
 </script>
 
-  
+
+
+<footer class="footer">
+  &copy; 2025 [block]. Tous droits réservés.
+</footer>
 
 </body>
 </html>

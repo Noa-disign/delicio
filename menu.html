@@ -13,9 +13,9 @@
 body {
   background: #0a0a0a;
   color: #fff;
-  font-family: 'Inter', sans-serif;
-  padding: 90px 20px;
-  text-align: center; /* Centre tout le texte */
+  font-family: 'Playfair Display', serif;
+  padding-top: 90px; /* hauteur du header */
+  text-align: center;
 }
 
 /* Sauf le header et le menu burger */
@@ -95,7 +95,7 @@ header *,
 }
 
 header h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   font-size: 38px;
   flex-shrink: 0;
   margin-left: 3px;
@@ -104,6 +104,7 @@ header h1 {
 nav {
   flex: 1;
   display: flex;
+  font-family: 'Inter', sans-serif;
   justify-content: center; /* centre horizontalement le menu */
   font-size: 19px;
 }
@@ -283,14 +284,82 @@ nav a:hover {
         height: auto;
       }
     }
+
+
+    .reservation-button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  color: black;
+}
+
+.reservation-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(130, 82%, 33%);
+  color: white;
+  box-shadow: rgb(0, 116, 10) 0px 7px 29px 0px;
+}
+
+.reservation-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(128, 84%, 37%);
+  color: white;
+  box-shadow: rgb(41, 112, 0) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+/* Responsive : cache le bouton sur mobile */
+@media screen and (max-width: 768px) {
+  .reservation-button {
+    display: none;
+  }
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1 0 auto;
+}
+.footer {
+  width: 100%;
+  background: #111;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #aaa;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+  right: 0;
+  flex-shrink: 0;
+  z-index: 10;
+}
   </style>
 </head>
 <body>
 
-<body>
 
   <header>
-    <h1>Delicio</h1>
+    <h1>[block]</h1>
     <div class="menu-toggle" id="menu-toggle">
   <span></span>
   <span></span>
@@ -298,15 +367,17 @@ nav a:hover {
 </div>
 <nav>
   <ul>
+    <li><a href="index.html">Acceuil</a></li>
     <li><a href="menu.html">Menu</a></li>
-    <li><a href="about">À propos</a></li>
-    <li><a href="reservation.html">Réservations</a></li>
+    <li><a href="evenement.html">Evenement</a></li>
     <li><a href="noustrouver.html">Nous trouver</a></li>
     <li><a href="galerie.html">En images</a></li>
     <li><a href="contact">Contact</a></li>
   </ul>
 </nav>
-
+<!-- From Uiverse.io by alexroumi --> 
+<a href="reservation.html" class="reservation-button">Réserver</a>
+</button>
   </header>
 
   <main>
@@ -369,5 +440,12 @@ nav a:hover {
       }
     });
   </script>
+
+
+<footer class="footer">
+  &copy; 2025 [block]. Tous droits réservés.
+</footer>
+
 </body>
 </html>
+
