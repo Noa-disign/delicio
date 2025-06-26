@@ -77,7 +77,7 @@ nav a {
 }
 
 nav a:hover {
-  color:  #e26dff;
+  color:  #009c08;
 }
 
 @media (max-width: 600px) {
@@ -239,7 +239,7 @@ nav a:hover {
       display: block;
       width: 80px;
       height: 4px;
-      background: #00c700;
+      background:#00c773;
       margin: 25px auto 0;
       border-radius: 2px;
     }
@@ -431,6 +431,46 @@ main {
   right: 0;
   flex-shrink: 0;
   z-index: 10;
+}
+
+.reservation-button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  color: black;
+}
+
+.reservation-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(130, 82%, 33%);
+  color: white;
+  box-shadow: rgb(0, 116, 10) 0px 7px 29px 0px;
+}
+
+.reservation-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(128, 84%, 37%);
+  color: white;
+  box-shadow: rgb(41, 112, 0) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
+/* Responsive : cache le bouton sur mobile */
+@media screen and (max-width: 768px) {
+  .reservation-button {
+    display: none;
+  }
 }
 
   </style>

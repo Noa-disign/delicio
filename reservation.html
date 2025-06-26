@@ -55,6 +55,8 @@ body {
       animation: fadeIn 1s forwards ease-out 0.3s;
     }
 
+    
+
     input, button {
       padding: 18px;
       font-size: 1rem;
@@ -188,45 +190,42 @@ select:invalid {
 
 
 .reservation-button {
-  padding: 15px 25px;
-  border: 2px solid white;
-  border-radius: 15px;
-  background: transparent;
-  color: white;
-  font-weight: 1000;
-  font-size: 16px;
-  position: relative;
-  z-index: 1;
-  transition: all 250ms ease;
+  padding: 17px 40px;
+  border-radius: 50px;
   cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
   text-decoration: none;
   display: inline-block;
+  font-weight: bold;
+  color: black;
 }
 
-.reservation-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  border-radius: 15px;
-  background-color: #008b0cb7;
-  z-index: -1;
-  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-  transition: all 250ms;
+.reservation-button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(130, 82%, 33%);
+  color: white;
+  box-shadow: rgb(0, 116, 10) 0px 7px 29px 0px;
 }
 
-.reservation-button:hover::before {
-  width: 100%;
+.reservation-button:active {
+  letter-spacing: 3px;
+  background-color: hsl(128, 84%, 37%);
+  color: white;
+  box-shadow: rgb(41, 112, 0) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
 }
 
-/* Ajoute ou modifie ce bloc dans ton CSS */
-@media (max-width: 600px) {
+/* Responsive : cache le bouton sur mobile */
+@media screen and (max-width: 768px) {
   .reservation-button {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -313,7 +312,7 @@ nav a {
 }
 
 nav a:hover {
-  color:  #e26dff;
+  color:  #009c08;
 }
 
 @media (max-width: 600px) {
