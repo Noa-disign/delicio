@@ -414,23 +414,28 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  /* ...autres styles... */
 }
-main {
+
+main, .highlighted-events {
   flex: 1 0 auto;
 }
+
 .footer {
-  width: 100%;
+  width: 100vw;
   background: #111;
   text-align: center;
   padding: 40px 20px;
   font-size: 14px;
   color: #aaa;
   box-sizing: border-box;
-  position: relative;
+  position: relative; /* plus de fixed */
   left: 0;
   right: 0;
-  flex-shrink: 0;
-  z-index: 10;
+  bottom: 0;
+  border-top: 1.5px solid #222;
+  margin-top: 0;
+  z-index: 1001;
 }
 
 .reservation-button {

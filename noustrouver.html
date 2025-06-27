@@ -16,38 +16,19 @@
       height: 100%;
       min-height: 100%;
     }
-  body {
+body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #0a0a0a url('block5.png') center center/cover no-repeat;
+  background: #0a0a0a; /* couleur unie, plus d'image */
   color: #fff;
   font-family: 'Inter', sans-serif;
   padding-top: 90px;
   text-align: center;
 }
-/* Pour que l'image de fond prenne vraiment tout l'écran */
-body {
-  background: #0a0a0a url('block5.png') center center/cover no-repeat fixed;
-  background-size: cover;
-  background-attachment: fixed;
-}
 
-/* Ajoute un voile sombre sur le fond */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.65); /* ajuste l'opacité si besoin */
-  z-index: 0;
-  pointer-events: none;
-}
 
-/* Mets la box au-dessus du fond */
-main, header, footer {
-  position: relative;
-  z-index: 1;
-}
+
 
 .container {
   display: flex;
@@ -453,22 +434,36 @@ main {
     background-color: #005200;
   }
 }
+    html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* ...autres styles... */
+}
+
+main, .highlighted-events {
+  flex: 1 0 auto;
+}
+
 .footer {
   width: 100vw;
-  background: #111; /* 100% opaque, pas de rgba */
+  background: #111;
   text-align: center;
   padding: 40px 20px;
   font-size: 14px;
   color: #aaa;
   box-sizing: border-box;
-  position: fixed;
+  position: relative;
   left: 0;
   right: 0;
   bottom: 0;
-  flex-shrink: 0;
-  z-index: 1001;
-  margin-top: 0;
   border-top: 1.5px solid #222;
+  margin-top: 0;
+  z-index: 1001;
 }
 
 @media (max-width: 600px) {
