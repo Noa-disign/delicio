@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diffusions Sportives | Le Green Bar</title>
+  <title>Diffusions Sportives |Le [block]</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -496,7 +496,7 @@ main, .highlighted-events {
     <li><a href="evenement.html">Evenement</a></li>
     <li><a href="noustrouver.html">Nous trouver</a></li>
     <li><a href="galerie.html">En images</a></li>
-    <li><a href="contact">Contact</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
 </nav>
 <!-- From Uiverse.io by alexroumi --> 
@@ -549,12 +549,7 @@ main, .highlighted-events {
       menuToggle.classList.toggle('active');
       menuToggle.setAttribute('aria-expanded', isActive);
 
-      if (isActive) {
-        const firstLink = nav.querySelector('a');
-        if (firstLink) firstLink.focus();
-      } else {
-        menuToggle.focus();
-      }
+
     }
 
     menuToggle.addEventListener('click', toggleMenu);

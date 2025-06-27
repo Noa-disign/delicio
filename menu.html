@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Menu - Le Green Bar</title>
+  <title>Menu - Le [block]</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -99,10 +100,9 @@ header *,
 }
 
 header h1 {
-  font-family: 'Inter', sans-serif;
-  font-size: 38px;
+  font-family: 'inter', serif;
+  font-size: 42px;
   flex-shrink: 0;
-  margin-left: 3px;
 }
 
 nav {
@@ -409,12 +409,7 @@ main {
       menuToggle.classList.toggle('active');
       menuToggle.setAttribute('aria-expanded', isActive);
 
-      if (isActive) {
-        const firstLink = nav.querySelector('a');
-        if (firstLink) firstLink.focus();
-      } else {
-        menuToggle.focus();
-      }
+
     }
 
     menuToggle.addEventListener('click', function(e) {
