@@ -52,9 +52,6 @@
 }
 
 @media screen and (max-width: 1024px) {
-  nav {
-    font-size: 16px !important;
-  }
   nav ul {
     gap: 18px !important;           /* espace horizontal raisonnable, comme sur Mac mais réduit */
     padding: 0 !important;
@@ -64,7 +61,7 @@
     margin: 0 !important;
   }
   nav ul li a {
-    font-size: 16px !important;     /* taille de police adaptée tablette */
+    font-size: 18px !important;     /* taille de police adaptée tablette */
     padding: 6px 10px !important;   /* espace autour du texte, ni trop ni trop peu */
   }
   header {
@@ -79,6 +76,14 @@
     padding: 8px 16px !important;
   }
 }
+
+@media screen and (min-width: 1025px) {
+  nav ul li a {
+    font-size: 22px !important;
+  }
+}
+
+
 @media screen and (max-width: 1024px) {
   .hero-overlay {
     top: 40px !important; /* plus haut sur tablette/iPad */
@@ -925,6 +930,12 @@ nav a:hover {
 }
 
 @media screen and (max-width: 768px) {
+  .bottom-logo {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .bottom-logo {
     display: none !important;
   }

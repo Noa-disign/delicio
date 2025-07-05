@@ -203,6 +203,8 @@ nav a:hover {
   color:  #009c08;
 }
 
+
+
 @media (max-width: 600px) {
   nav {
     position: fixed;
@@ -265,6 +267,8 @@ nav a:hover {
     color: #000;
     outline: none;
   }
+
+  
 
 /* Bouton hamburger épuré et premium */
 .menu-toggle {
@@ -370,6 +374,83 @@ nav a:hover {
   .hero-overlay {
     top: 40px;
     left: 20px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  nav ul {
+    gap: 18px !important;           /* espace horizontal raisonnable, comme sur Mac mais réduit */
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  nav ul li {
+    margin: 0 !important;
+  }
+  nav ul li a {
+    font-size: 18px !important;     /* taille de police adaptée tablette */
+    padding: 6px 10px !important;   /* espace autour du texte, ni trop ni trop peu */
+  }
+  header {
+    padding: 12px 18px !important;
+  }
+  .reservation-button {
+    font-size: 14px !important;
+    padding: 10px 18px !important;
+  }
+  .hero-button {
+    font-size: 16px !important;
+    padding: 8px 16px !important;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  nav ul li a {
+    font-size: 22px !important;
+  }
+}
+
+
+@media screen and (max-width: 1024px) {
+  .hero-overlay {
+    top: 40px !important; /* plus haut sur tablette/iPad */
+    left: 40px !important;
+  }
+  .hero-button {
+    font-size: 16px !important;
+    padding: 8px 10px !important;
+  }
+}
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  nav {
+    font-size: 19px !important;
+  }
+  nav ul {
+    gap: 37px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  nav ul li {
+    margin: 0 !important;
+  }
+  nav ul li a {
+    font-size: 19px !important;
+    padding: 8px 18px !important;
+  }
+  header {
+    padding: 20px 40px !important;
+  }
+  .reservation-button {
+    font-size: 15px !important;
+    padding: 17px 40px !important;
+  }
+  .hero-button {
+    font-size: 20px !important;
+    padding: 10px 20px !important;
+  }
+  .hero-overlay {
+    top: 70px !important;
+    left: 40px !important;
   }
 }
 
