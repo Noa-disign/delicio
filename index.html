@@ -1700,7 +1700,6 @@ nav a:hover {
 
 
 
-
   </style>
 </head>
 <body>
@@ -2050,6 +2049,19 @@ nav a:hover {
       menuToggle.focus();
     }
   });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const password = "2324"; // 🔐 Change le mot de passe ici
+  const userInput = prompt("Ce site est protégé.\nEntre le mot de passe :");
+
+  if (userInput === password) {
+    document.getElementById("site-content").classList.remove("hidden");
+  } else {
+    document.body.innerHTML = "<h1>⛔ Accès refusé</h1><p>Mot de passe incorrect.</p>";
+  }
+});
 </script>
 
 

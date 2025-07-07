@@ -455,20 +455,23 @@ main {
       }
     }
 
-    .footer {
-      width: 100%;
-      background: #111;
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 14px;
-      color: #aaa;
-      box-sizing: border-box;
-      position: relative;
-      left: 0;
-      right: 0;
-      flex-shrink: 0;
-      z-index: 10;
-    }
+.footer {
+  width: 100%;
+  background: #111;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+  color: #aaa;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+  right: 0;
+  flex-shrink: 0;
+  z-index: 10;
+  /* Pas de margin ni de max-width ici */
+}
+
+
   </style>
 </head>
 <body>
@@ -504,9 +507,11 @@ main {
     </div>
   </main>
   <a href="reservation.html" class="floating-btn">Réserver</a>
+ 
   <footer class="footer">
     &copy; 2025 [block]. Tous droits réservés.
   </footer>
+
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.querySelector('nav');
