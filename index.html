@@ -2124,6 +2124,12 @@ img {
 </script>
 
 <script>
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('dragstart', e => e.preventDefault());
+});
+</script>
+
+/*
 document.addEventListener("DOMContentLoaded", () => {
   const password = "2324"; // 🔐 Change le mot de passe ici
   const userInput = prompt("Ce site est protégé.\nEntre le mot de passe :");
@@ -2134,13 +2140,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.innerHTML = "<h1>⛔ Accès refusé</h1><p>Mot de passe incorrect.</p>";
   }
 });
-</script>
+*/
 
-<script>
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('dragstart', e => e.preventDefault());
-});
-</script>
 
 
 
