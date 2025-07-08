@@ -27,6 +27,16 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; /* <-- permet au main de prendre tout l'espace disponible */
+}
+
 
     header {
       position: fixed;
@@ -433,7 +443,7 @@ main {
     .floating-btn {
       display: none;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 768px) {
       .floating-btn {
         display: block;
         position: fixed;
@@ -455,6 +465,10 @@ main {
       }
     }
 
+
+
+
+
 .footer {
   width: 100%;
   background: #111;
@@ -470,6 +484,8 @@ main {
   z-index: 10;
   /* Pas de margin ni de max-width ici */
 }
+
+
 
 
   </style>
