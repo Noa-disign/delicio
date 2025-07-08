@@ -581,56 +581,22 @@ nav a:hover {
   border-radius: 2px;
 }
 
-/* Suppression du doublon */
+/* Styles de base */
+
 .dishes {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 50px;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive mobile (max 600px) */
-@media (max-width: 600px) {
-  .section {
-    padding: 80px 20px;
-  }
-
-  .section h3 {
-    font-size: 28px;
-    margin-bottom: 40px;
-  }
-
-  .section h3::after {
-    width: 50px;
-    height: 3px;
-    margin: 15px auto 0;
-  }
-
-  .dishes {
-    gap: 20px;
-    flex-direction: column;
-    align-items: center;
-  }
+  gap: 20px; /* réduit encore */
 }
 
 .dish {
-  width: 420px;
-  height: 600px;
+  width: 260px;  /* 55% de 475 */
+  height: 374px; /* 55% de 680 */
   background: #1e1e1e;
-  border-radius: 24px;
+  border-radius: 11px; /* réduit */
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(255, 136, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(255, 136, 0, 0.06);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
@@ -646,14 +612,9 @@ nav a:hover {
   z-index: 2;
 }
 
-/* Animation au scroll */
-.dish.visible {
-  opacity: 1;
-}
-
 .dish:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 35px 65px rgba(255, 145, 0, 0.3);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 45px rgba(255, 145, 0, 0.25);
 }
 
 .dish-image {
@@ -673,7 +634,7 @@ nav a:hover {
 
 .dish-image img {
   width: 100%;
-  height: 300px;
+  height: 198px; /* 55% de 360 */
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease, filter 0.4s ease;
@@ -681,13 +642,13 @@ nav a:hover {
 }
 
 .dish:hover .dish-image img {
-  transform: scale(1.1);
+  transform: scale(1.05);
   filter: brightness(1.05);
 }
 
 .dish-info {
   flex: 1;
-  padding: 28px 24px;
+  padding: 14px 12px; /* réduit */
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -696,95 +657,115 @@ nav a:hover {
 }
 
 .dish-info h4 {
-  font-size: 30px;
-  margin-bottom: 12px;
+  font-size: 16px; /* réduit */
+  margin-bottom: 8px;
   font-family: 'Playfair Display', serif;
   color: #56c722;
   text-shadow: 1px 1px 0 #000;
 }
 
 .dish-info p {
-  font-size: 20px;
+  font-size: 13px;
+  line-height: 1.4;
   color: #ccc;
-  line-height: 1.6;
 }
 
+/* ===== Responsive ===== */
+
+/* Mobile (≤600px) */
 @media (max-width: 600px) {
+  .section {
+    padding: 60px 15px;
+  }
+
+  .section h3 {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+  .section h3::after {
+    width: 40px;
+    height: 2.5px;
+    margin: 12px auto 0;
+  }
+
+  .dishes {
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .dish {
-    width: 110%;
+    width: 100%;
     height: auto;
-    border-radius: 16px;
-    margin-left: -5%; /* Décale vers la gauche pour centrer */
+    border-radius: 10px;
+    margin-left: 0;
   }
 
   .dish-image img {
-    height: 200px;
+    height: 150px;
   }
 
   .dish-info {
-    padding: 20px 16px;
+    padding: 14px 12px;
   }
 
   .dish-info h4 {
-    font-size: 24px;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .dish-info p {
+    font-size: 12px;
+  }
+}
+
+/* Tablette (601px–1023px) 55% desktop */
+@media (min-width: 601px) and (max-width: 1023px) {
+  .dishes {
+    gap: 18px;
+    justify-content: center;
+  }
+
+  .dish {
+    width: 260px;
+    height: 374px;
+    border-radius: 11px;
+  }
+
+  .dish-image img {
+    height: 198px;
+  }
+
+  .dish-info {
+    padding: 14px 12px;
+  }
+
+  .dish-info h4 {
+    font-size: 16px;
     margin-bottom: 8px;
   }
 
   .dish-info p {
-    font-size: 18px;
+    font-size: 13px;
   }
 }
 
-.dish-container {
-  /* Pas de flex par défaut, mobile/tablette restent empilés */
-}
-
-@media (min-width: 1024px) {
-  .dish-container {
-    display: flex;
-    flex-wrap: nowrap;        /* Tout sur une ligne */
-    justify-content: center;  /* Centrer horizontalement */
-    gap: 24px;                /* Espacement entre plats */
-    overflow-x: auto;         /* Scroll horizontal si trop large */
-    padding: 20px;
+/* Ordinateur classique (1024px–1199px) 65% desktop */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .dishes {
+    gap: 22px;
   }
 
   .dish {
-    flex: 0 0 28%;            /* Chaque plat fait ~28% de la largeur du conteneur */
-    max-width: 400px;         /* Taille max pour éviter trop grand */
-    height: auto;             /* Hauteur proportionnelle */
+    width: 309px;  /* 65% de 475 */
+    height: 442px; /* 65% de 680 */
+    border-radius: 14px;
+    box-shadow: 0 13px 35px rgba(255, 136, 0, 0.08);
   }
 
   .dish-image img {
-    height: auto;             /* Image s'adapte à la nouvelle hauteur */
-    max-height: 280px;        /* Ajuste la hauteur max si besoin */
-    object-fit: cover;
-  }
-}
-
-
-@media (min-width: 600px) {
-  .dish-container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 20px;
-  }
-
-  .dish {
-    flex: 0 0 auto;
-    width: 250px;
-    height: 370px;
-    border-radius: 16px;
-    scroll-snap-align: start;
-  }
-
-  .dish-image img {
-    height: 175px;
-    object-fit: cover;
+    height: 234px; /* 65% de 360 */
   }
 
   .dish-info {
@@ -792,12 +773,45 @@ nav a:hover {
   }
 
   .dish-info h4 {
-    font-size: 18px;
-    margin-bottom: 6px;
+    font-size: 19px;
+    margin-bottom: 10px;
   }
 
   .dish-info p {
     font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+/* Mac / grand écran (≥1200px) 75% desktop */
+@media (min-width: 1200px) {
+  .dishes {
+    gap: 24px;
+  }
+
+  .dish {
+    width: 356px;  /* 75% de 475 */
+    height: 510px; /* 75% de 680 */
+    border-radius: 16px;
+    box-shadow: 0 14px 37px rgba(255, 136, 0, 0.09);
+  }
+
+  .dish-image img {
+    height: 270px; /* 75% de 360 */
+  }
+
+  .dish-info {
+    padding: 18px 16px;
+  }
+
+  .dish-info h4 {
+    font-size: 27px;
+    margin-bottom: 12px;
+  }
+
+  .dish-info p {
+    font-size: 20px;
+    line-height: 1.5;
   }
 }
 
@@ -2141,8 +2155,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 */
-
-
 
 
 
