@@ -13,16 +13,18 @@
     }
 body {
   margin: 0;
-  padding: 90px 0 0; /* espace pour le header */
+  padding: 90px 0 0;
   font-family: 'Playfair Display', serif;
   color: #fff;
   text-align: center;
-  background: linear-gradient(rgba(58, 58, 58, 0), rgba(0, 0, 0, 0.9)),
-              url('blokk8.jpg') no-repeat center center fixed;
+
+  background-color: #000; /* Couleur de fond de base, en cas d'erreur de chargement ou transparence */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)),
+                    url('blokk8.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 
