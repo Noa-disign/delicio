@@ -515,12 +515,15 @@ main {
   }
 }
 
-/* Mac, iPad Pro et tablettes (900px à 1199px) */
 @media (max-width: 1199px) and (min-width: 900px) {
   .menu-block {
-    padding: 60px 60px;
-    margin-top: 10px; /* espace pour le header */
-    gap: 50px;
+    padding: 60px 40px;       /* un peu moins de padding horizontal */
+    gap: 20px;                /* réduire l'écart entre colonnes */
+    justify-content: space-around; /* pour étirer un peu mieux et équilibrer */
+  }
+
+  .menu-column {
+    min-width: 320px;         /* un peu plus large pour remplir mieux */
   }
 
   .menu-category {
@@ -531,6 +534,7 @@ main {
     font-size: 1.15rem;
   }
 }
+
 
 /* Tablettes, iPad portrait et petits laptops (600px à 899px) */
 @media (max-width: 899px) and (min-width: 600px) {
