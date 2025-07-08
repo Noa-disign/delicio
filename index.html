@@ -763,6 +763,43 @@ nav a:hover {
 }
 
 
+@media (min-width: 600px) {
+  .dish-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .dish {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 370px;
+    border-radius: 16px;
+    scroll-snap-align: start;
+  }
+
+  .dish-image img {
+    height: 175px;
+    object-fit: cover;
+  }
+
+  .dish-info {
+    padding: 16px 14px;
+  }
+
+  .dish-info h4 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .dish-info p {
+    font-size: 15px;
+  }
+}
 
 
 
@@ -1767,6 +1804,7 @@ img {
 <div class="wave-text">
   <span>B</span><span>O</span><span>N</span><span>J</span><span>O</span><span>U</span><span>R</span>
 </div>
+<a href="reservation.html" class="image-button">Réserver une table</a>
 
 
     <button class="cta-btn2">Voir plus</button>
