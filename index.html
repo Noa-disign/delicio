@@ -735,30 +735,28 @@ nav a:hover {
   }
 }
 
-.dish-container {
-  /* Pas de flex par défaut, mobile/tablette restent empilés */
-}
+
 
 @media (min-width: 1024px) {
   .dish-container {
-    display: flex;
-    flex-wrap: nowrap;        /* Tout sur une ligne */
-    justify-content: center;  /* Centrer horizontalement */
-    gap: 24px;                /* Espacement entre plats */
-    overflow-x: auto;         /* Scroll horizontal si trop large */
-    padding: 20px;
+    display: flex !important;
+    flex-wrap: nowrap !important;        /* Tout sur une ligne */
+    justify-content: center !important;  /* Centrer horizontalement */
+    gap: 24px !important;                /* Espacement entre plats */
+    overflow-x: auto !important;         /* Scroll horizontal si trop large */
+    padding: 20px !important;
   }
 
   .dish {
-    flex: 0 0 28%;            /* Chaque plat fait ~28% de la largeur du conteneur */
-    max-width: 400px;         /* Taille max pour éviter trop grand */
-    height: auto;             /* Hauteur proportionnelle */
+    flex: 0 0 28% !important;            /* Chaque plat fait ~28% de la largeur du conteneur */
+    max-width: 400px !important;         /* Taille max pour éviter trop grand */
+    height: auto !important;             /* Hauteur proportionnelle */
   }
 
   .dish-image img {
-    height: auto;             /* Image s'adapte à la nouvelle hauteur */
-    max-height: 280px;        /* Ajuste la hauteur max si besoin */
-    object-fit: cover;
+    height: auto !important;             /* Image s'adapte à la nouvelle hauteur */
+    max-height: 280px !important;        /* Ajuste la hauteur max si besoin */
+    object-fit: cover !important;
   }
 }
 
