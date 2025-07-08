@@ -735,20 +735,34 @@ nav a:hover {
   }
 }
 
+.dish-container {
+  /* Pas de flex par défaut, mobile/tablette restent empilés */
+}
+
 @media (min-width: 1024px) {
   .dish-container {
     display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: nowrap;        /* Tout sur une ligne */
+    justify-content: center;  /* Centrer horizontalement */
+    gap: 24px;                /* Espacement entre plats */
+    overflow-x: auto;         /* Scroll horizontal si trop large */
     padding: 20px;
   }
 
   .dish {
-    flex: 0 0 auto; /* Garde la taille d'origine (420px) */
+    flex: 0 0 28%;            /* Chaque plat fait ~28% de la largeur du conteneur */
+    max-width: 400px;         /* Taille max pour éviter trop grand */
+    height: auto;             /* Hauteur proportionnelle */
+  }
+
+  .dish-image img {
+    height: auto;             /* Image s'adapte à la nouvelle hauteur */
+    max-height: 280px;        /* Ajuste la hauteur max si besoin */
+    object-fit: cover;
   }
 }
+
+
 
 
 
