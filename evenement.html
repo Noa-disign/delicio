@@ -12,30 +12,36 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f0f0f;
-      color: #ffffff;
-      min-height: 100vh;
-      background-image: url('salon.jpg');
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      z-index: 0;
-      display: block;
-      padding: 0;
-      overflow-x: hidden;
-      
-    }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f0f0f; /* noir profond en fallback */
+  color: #ffffff;
+  min-height: 100vh;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url('salon.jpg'); /* ← ton image */
+  background-size: cover;
+  background-position: center;
+  display: block;
+  padding: 0;
+  overflow-x: hidden;
+}
 
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: -1;
-      pointer-events: none;
-    }
+
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8); /* ← ce fond noir semi-transparent */
+  z-index: -1;
+  pointer-events: none;
+}
+
+
 
     
       header {
@@ -501,6 +507,8 @@ body {
   /* ...autres styles... */
 }
 
+
+
 main, .highlighted-events {
   flex: 1 0 auto;
 }
@@ -518,7 +526,7 @@ main, .highlighted-events {
   right: 0;
   bottom: 0;
   border-top: 1.5px solid #222;
-  margin-top: 0;
+  margin-top: -65px;
   z-index: 1001;
 }
 
@@ -561,6 +569,72 @@ main, .highlighted-events {
     display: none;
   }
 }
+#social-links {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+  background: none; /* Fond retiré */
+}
+
+.social-cards {
+  display: flex;
+  gap: 3.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-card a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f7;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  color: #00c700;
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+}
+
+.social-card a:hover {
+  background-color: #00c700;
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 8px 25px rgba(16, 138, 12, 0.6);
+}
+
+.icon {
+  width: 34px;
+  height: 34px;
+  fill: currentColor;
+}
+
+@media (max-width: 600px) {
+  #social-links {
+    padding: 2rem 1rem;
+  }
+
+  .social-cards {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .social-card a {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+
+
 
   </style>
 </head>
@@ -587,6 +661,8 @@ main, .highlighted-events {
 <a href="reservation.html" class="reservation-button">Réserver</a>
 </button>
   </header>
+
+  
 
   <section class="highlighted-events">
     <h3>Événements diffusés</h3>
@@ -620,9 +696,41 @@ main, .highlighted-events {
         </div>
       </div>
     </div>
+
+        <div class="scroll-in">
+<section id="social-links">
+  <ul class="social-cards">
+    <li class="social-card">
+      <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/>
+        </svg>
+      </a>
+    </li>
+<li class="social-card">
+  <a href="tel:+33123456789" aria-label="Téléphone" target="_blank" rel="noopener">
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16.8 6.6l4.2 8.4a1.9 1.9 0 0 1-.4 2l-2.8 2.8c2.3 4.6 5.6 7.9 10.2 10.2l2.8-2.8a1.9 1.9 0 0 1 2-.4l8.4 4.2a2 2 0 0 1 1.2 1.8v6a2 2 0 0 1-2 2C25.5 40.8 7.2 22.5 7.2 6.6a2 2 0 0 1 2-2h6a2 2 0 0 1 1.6 1z"/>
+    </svg>
+  </a>
+</li>
+    <li class="social-card">
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+        </svg>
+      </a>
+    </li>
+  </ul>
+  </div>
+
   </section>
 
+
+
+
   <a href="reservation.html" class="floating-btn">Réserver</a>
+
 
   <script>
     const menuToggle = document.getElementById('menu-toggle');
